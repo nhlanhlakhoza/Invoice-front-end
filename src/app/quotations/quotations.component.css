@@ -1,0 +1,16 @@
+button{
+    background: #ECECEC;
+    border: 0px;
+    font-size: smaller;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    color:#5F5F5F;
+    border-radius: 2px;
+
+    
+
+}
+
+.bottom-menu ul li a:hover {
+    pointer-events: none; /* Disable pointer events */
+  }

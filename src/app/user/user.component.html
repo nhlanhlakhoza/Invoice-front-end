@@ -1,0 +1,110 @@
+<!-- form.component.html -->
+<div>
+  <!-- Step 1: Client Information -->
+<!-- Assuming this is part of a larger form -->
+<div *ngIf="currentStep === 1">
+  <form [formGroup]="formData" (ngSubmit)="nextStep()">
+    <!-- Client Information -->
+    <div formGroupName="client">
+      <label>First Name:</label>
+      <input type="text" formControlName="f_name" required />
+      
+
+      <label>Last Name:</label>
+      <input type="text" formControlName="l_name" required />
+      
+      <label>Email:</label>
+      <input type="email" formControlName="email" required />
+      
+      <label>Phone Number:</label>
+      <input type="text" formControlName="phoneNo" required />
+    </div>
+
+    <!-- Disable the "Next" button if any field in the client form group is invalid or empty -->
+    <button type="submit" [disabled]="!formData.get('client')?.valid">Next</button>
+  </form>
+</div>
+
+
+
+  <!-- Step 2: Client Address -->
+  <div *ngIf="currentStep === 2">
+    <form [formGroup]="formData" (ngSubmit)="nextStep()">
+      <!-- Client Address -->
+      <div formGroupName="clientAddress">
+        <label>Street Number:</label>
+        <input type="text" formControlName="streetNo" required />
+     
+
+        <label>Street Name:</label>
+        <input type="text" formControlName="streetName" required />
+       
+        <label>Town:</label>
+        <input type="text" formControlName="town" required />
+        
+
+        <label>City:</label>
+        <input type="text" formControlName="city" required />
+       
+
+        <label>Postal Code:</label>
+        <input type="text" formControlName="postalCode" required />
+        
+      </div>
+
+      <button type="submit" (click)="prevStep()">Previous</button>
+      <button type="submit" [disabled]="!formData.get('clientAddress')?.valid">Next</button>
+    </form>
+  </div>
+
+  <!-- Step 3: Invoice and Quote Information -->
+  <div *ngIf="currentStep === 3">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <!-- Invoice and Quote Information -->
+      <div formGroupName="invoice">
+        <label>Total Invoice Amount:</label>
+        <input type="text" formControlName="totalAmount" required />
+       
+      </div>
+
+      <div formGroupName="quote">
+        <label>Total Quote Amount:</label>
+        <input type="text" formControlName="totalAmount" required />
+       
+      </div>
+
+      <!-- Items -->
+      <div formArrayName="items">
+        <div *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+          <label>Item Description:</label>
+          <input type="text" formControlName="desc" required />
+          
+
+          <label>Price:</label>
+          <input type="text" formControlName="price" required />
+       
+
+          <label>Quantity:</label>
+          <input type="text" formControlName="qty" required />
+         
+
+          <button type="button" (click)="removeItem(i)">Remove Item</button>
+        </div>
+      </div>
+      <button type="button" (click)="addItem()">Add Item</button>
+
+      <div>
+        <label>Type:</label>
+        <select formControlName="type" required>
+          <option value="">Select Type</option>
+          <option value="Invoice">Invoice</option>
+          <option value="Quote">Quote</option>
+        </select>
+      
+      </div>
+
+      <button type="submit" (click)="prevStep()">Previous</button>
+      <button type="submit"[disabled]="!formData.valid">Submit</button>
+    </form>
+  </div>
+</div>

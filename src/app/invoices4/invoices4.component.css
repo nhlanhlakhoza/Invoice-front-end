@@ -1,0 +1,52 @@
+.not-paid{
+    color:#DB2419;
+    background-color: hsla(3, 80%, 48%, 0.4);
+    border-radius: 8.5px;
+    font-size: 10.5px;
+    padding: 1.5px;
+    padding-left: 3.5;
+    padding-right: 3.5;
+
+
+}
+ 
+.paid{
+    color:#6ACC74;
+    
+    background-color:#6ACC7466;
+    
+    border-radius: 8.5px;
+    font-size: 10.5px;
+    padding: 1.5px;
+    padding-left: 3.5;
+    padding-right: 3.5;
+
+}
+
+.draft{
+    color: #E1BF45;
+    background-color: #E1BF4566;
+    border-radius: 8.5px;
+    font-size: 10.5px;
+    padding: 1.5px;
+    padding-left: 3.5;
+    padding-right: 3.5;
+
+
+}
+
+button{
+    background: #ECECEC;
+    border: 0px;
+    font-size: smaller;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    color:#5F5F5F;
+    border-radius: 2px;
+
+
+}
+
+.menu-link:hover {
+    pointer-events: none; /* Disable pointer events */
+  }

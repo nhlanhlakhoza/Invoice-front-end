@@ -1,0 +1,21 @@
+<span><strong style="text-decoration: underline;">Quotes</strong></span>
+
+<div id="orderStatisticsChart"></div>
+
+<ul class="p-0 m-0">
+  <li *ngFor="let quote of quotes" class="d-flex">
+    <div class="avatar flex-shrink-0 me-3">
+      <span class="avatar-initial rounded bg-label-primary"><i>A.</i></span>
+    </div>
+    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+      <div class="me-2">
+        <h6 class="mb-0">{{ quote.company }}</h6>
+        <small class="text-muted">{{ quote.date }}</small>
+      </div>
+      <div class="user-progress">
+        <small class="fw-medium">R {{ quote.totalAmount }}</small>
+      </div>
+      <hr>
+    </div>
+  </li>
+</ul>
