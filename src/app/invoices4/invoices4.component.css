@@ -50,3 +50,33 @@ button{
 .menu-link:hover {
     pointer-events: none; /* Disable pointer events */
   }
+
+
+  .not-paid {
+    color: red; /* Adjust the color as per your design */
+  }
+  
+  .draft {
+    color: blue; /* Adjust the color as per your design */
+  }
+  /* your-component.component.css */
+
+/* Style for the label */
+label {
+  display: block; /* Make the label block-level for proper alignment */
+  margin-bottom: 5px; /* Add some space below the label */
+}
+
+/* Style for the select dropdown */
+select {
+  width: 200px; /* Set a fixed width for consistency */
+  padding: 5px; /* Add some padding for better appearance */
+  font-size: 16px; /* Adjust font size as needed */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  border-radius: 5px; /* Add some border radius for rounded corners */
+}
+
+/* Style for the options */
+option {
+  font-size: 14px; /* Adjust font size as needed */
+}

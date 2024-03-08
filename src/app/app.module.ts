@@ -23,8 +23,11 @@ import { UserComponent } from './user/user.component';
 import { PasswordChangeSettingComponent } from './password-change-setting/password-change-setting.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,12 +54,19 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule, // Import the MatNativeDateModule
+    MatInputModule
     
+
+
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DatePipe // Include DatePipe in providers array
   ],
   bootstrap: [AppComponent]
 })

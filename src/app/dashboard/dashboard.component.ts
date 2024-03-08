@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Quote } from '../quote';
+import { QuoteService } from '../quote.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +24,12 @@ export class DashboardComponent implements OnInit {
   alertMessage!: string;
   isPageRefreshed: any;
   refreshDone: any;
+  quotes: Quote[] = [];
+  invoices: any[] = [];
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router) { }
+  totalInvoiceAmount: number = 0;
+
+  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService) { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
@@ -39,11 +45,31 @@ export class DashboardComponent implements OnInit {
 
       // Fetch the user's profile picture
       this.fetchProfilePictureByEmail(this.email);
+      
+       // get the top 5
+      this.getTop5Quotes();
+
+       // Initial fetch of invoices when the component initializes
+       this.fetchInvoices();
+       
     } else {
       console.error('Token not found.');
     }
   }
+  fetchInvoices() {
+    this.http.get<any[]>('http://localhost:8081/user/homeInvoices?email=' + this.email)
+      .subscribe(
+        invoices => {
+          // Assuming your backend API returns only 5 invoices
+          this.invoices = invoices || [];
+            // Calculate the total amount of invoices
 
+        },
+        error => {
+          console.error('Error fetching invoices:', error);
+        }
+      );
+  }
   fetchProfilePictureByEmail(email: string) {
     this.http.get('http://localhost:8081/user/displayProfileImage', {
       responseType: 'blob',
@@ -92,6 +118,13 @@ export class DashboardComponent implements OnInit {
   toggleDropdown(event: any): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  getTop5Quotes(): void {
+    this.quoteService.getQuotes(this.email)
+      .subscribe((quotes): Quote[] => {
+        return this.quotes = quotes;
+      });
+  }
 
+  }
   
-}
+

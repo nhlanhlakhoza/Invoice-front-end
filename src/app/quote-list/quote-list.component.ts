@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteService } from '../quote.service';
 import { Quote } from '../quote';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-quote-list',
@@ -8,19 +9,20 @@ import { Quote } from '../quote';
   styleUrls: ['./quote-list.component.css']
 })
 export class QuoteListComponent  {
-  quotes: Quote[] = [];
-  email: string = 'nhlanhlakhoza05@gmail.com'; // Provide the email here
+  email: string = '';
+  invoices: any[] = [];
 
-  constructor(private quoteService: QuoteService) { }
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.getTop5Quotes();
-  }
-
-  getTop5Quotes(): void {
-    this.quoteService.getQuotes(this.email)
-      .subscribe((quotes): Quote[] => {
-        return this.quotes = quotes;
-      });
+  fetchInvoices() {
+    this.http.get<any[]>('http://localhost:8081/user/homeInvoices?email=' + this.email)
+      .subscribe(
+        invoices => {
+          this.invoices = invoices || [];
+        },
+        error => {
+          console.error('Error fetching invoices:', error);
+        }
+      );
   }
 }

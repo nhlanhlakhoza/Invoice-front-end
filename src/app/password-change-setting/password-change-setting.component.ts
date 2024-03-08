@@ -91,6 +91,7 @@ export class PasswordChangeSettingComponent {
           console.log(this.email)
           console.log(this.oldPassword)
           this.error = 'Old password is incorrect.';
+          this.showAlertMessage('error', 'Old password is incorrect.');
         }
       );
   }

@@ -108,10 +108,10 @@
            <li style="margin-left: 10px;">
             <a (click)="toggleForms('form3')">Unpaid</a>
            </li>
-
-           <li style="margin-left: 10px;">
-            <input type="text" placeholder="Search" >
-           </li>
+          <!-- Add an input field for search -->
+<li style="margin-left: 10px;">
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="performSearch()">
+</li>
 
            <li style="margin-left: 10px;">
             <button (click)="toggleForms('form4')">Filter</button>
@@ -125,52 +125,41 @@
 
           <!-- / Navbar -->
 
-          <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
-              
               <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form1'">
                   <div class="card h-100">
-
                     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
-                      <div class="">
-                        <div class="">
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="paid"> Paid</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="draft"> Draft</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-
+                      <div>
+                        <div>
+                       
+                          <div *ngIf="combinedItems.length > 0">
+                            <div *ngFor="let item of combinedItems">
+                              <div [ngClass]="{'invoice-info': item.invoiceId, 'quote-info': !item.invoiceId}">
+                                <!-- Display draft class for quotes -->
+                                <span *ngIf="!item.invoiceId" style="text-align: left; float: inline-end;" class="draft"> Draft</span>
+                                <span style="text-align: left;"> #{{item.invoiceId || item.id || 'N/A'}} . {{item.date}}</span>
+                                <span *ngIf="item.invoiceId" style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
+                                <label>Company Name</label>
+                                <span style="text-align: right; float: inline-end;"> R {{item.totalAmount || 'N/A'}}</span><br>
+                                <hr>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div *ngIf="combinedItems.length === 0">
+                            <p>No items to display.</p>
+                          </div>
+                          
                         </div>
-                        <div id="orderStatisticsChart"></div>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
-
+              
+          
 
                 <!--PAID-->
 
@@ -207,72 +196,62 @@
                 </div>
 
                 <!--END OF-->
+<!--Unpaid-->
+<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form3'">
+  <div class="card h-100">
+    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+      <div *ngFor="let invoice of invoices">
+        <div>
+          <span style="text-align: left;">{{ '# ' + invoice.invoiceId }} . {{ invoice.date }}</span>
+          <span style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
+          <label>Company Name</label>
+          <span style="text-align: right; float: inline-end;"> R {{ invoice.totalAmount || 'N/A' }}</span><br>
+          <hr>
+        </div>
+      </div>
+      <div id="orderStatisticsChart"></div>
+    </div>
+  </div>
+</div>
+<!--End of unpaid-->
 
-                <!--Unpaid-->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form3'">
-                  <div class="card h-100">
 
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
-                      <div class="">
-                        <div class="">
-                          
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
+               <!-- Filtering -->
+<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
+  <div class="card h-100">
+    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+      <div class="">
+        <div class="">
+          <mat-form-field>
+            <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+          </mat-form-field>
 
-                          <label>Company Name</label>
+          <mat-form-field>
+            <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+          </mat-form-field>
+          
 
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
+          <select [(ngModel)]="amountRange">
+            <option value="0 - 100">$0 - $100</option>
+            <option value="100 - 500">$100 - $500</option>
+            <option value="500 - 1000">$500 - $1000</option>
+            <!-- Add more options as needed -->
+          </select>
 
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
+          <li style="margin-left: 10px;">
+            <button (click)="applyFilter()">Apply Filter</button>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-
-                        </div>
-                        <div id="orderStatisticsChart"></div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <!--End of unpaid-->
-
-                <!--Filtering-->
-
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
-                  <div class="card h-100">
-
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
-                      <div class="">
-                        <div class="">
-                          
-                          
-
-                          <input type="text" placeholder="Date range" style=" margin-bottom: 25px;">
-
-                          <input type="text" placeholder="Amount range" style=" margin-bottom: 25px;">
-
-                          <li style="margin-left: 10px;">
-                            <button>Apply Filter</button>
-                           </li>
-
-                          
-
-                        </div>
-                        <div id="orderStatisticsChart"></div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-
-                <!--Filtering-->
-
+<!-- End of Filtering -->
 
 
  
@@ -350,4 +329,3 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-
