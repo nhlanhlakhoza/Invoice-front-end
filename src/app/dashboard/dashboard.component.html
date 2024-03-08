@@ -115,9 +115,9 @@
                         <div style="background-color: white; border-radius: 10px;text-align: center; border-bottom: 10px solid black;">
                      
                             <p style="font-size: 10px; margin-top: 30px;">TOTAL INVOICES</p> 
-                         
-                          <h1 style="font-weight: bold;color: black;">R </h1>
-                        
+                            <div *ngIf="totalInvoiceAmount !== undefined">
+                          <h1 style="font-weight: bold;color: black;">R {{ totalInvoiceAmount }}</h1>
+                        </div>
                           <a routerLink ="/invoices" class="btn btn-sm btn-outline-primary">View Invoices</a>
                         </div>
                         </div>
@@ -147,6 +147,7 @@
                         <div id="orderStatisticsChart"></div>
                       </div>
                       <ul class="p-0 m-0">
+                        <div *ngIf="invoices.length > 0"></div>
                         <li *ngFor="let invoice of invoices" class="d-flex mb-4 pb-1">
                           <div class="avatar flex-shrink-0 me-3">
                             <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
@@ -161,6 +162,9 @@
                             </div>
                           </div>
                         </li>
+                        <div *ngIf="invoices.length === 0">
+                          <p>No items to display.</p>
+                        </div>
                       </ul>
                       
           
@@ -185,6 +189,7 @@
                       </div>
 
                       <ul class="p-0 m-0">
+                        <div *ngIf="quotes.length > 0"></div>
                         <li class="d-flex" *ngFor="let quote of quotes">
                           <div class="avatar flex-shrink-0 me-3">
                             <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
@@ -202,6 +207,9 @@
                       <br>
                       
                         </li>
+                        <div *ngIf="quotes.length === 0">
+                          <p>No items to display.</p>
+                        </div>
                       </ul>
                       
                     </div>

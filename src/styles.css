@@ -161,6 +161,33 @@ box-sizing: border-box;}
   
 }
 
+.buttons {
+	position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 0.3em 0 1em 0;
+    /* width: 100%; */
+    vertical-align: middle;
+    color: #fff;
+    font-size: 12px;
+    line-height: 2px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    letter-spacing: 1px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-radius: 12px;
+    height: 40px;
+  }
+
+.buttonBlues {
+	background: #9570F1;
+	/*text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);*/
+	
+  }
+  
 /*.buttonBlue:hover { background: #357bd8; }*/
 
 

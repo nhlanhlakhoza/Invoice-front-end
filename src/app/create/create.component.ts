@@ -52,17 +52,17 @@ export class CreateComponent {
   ngOnInit(): void {
     this.formData = this.formBuilder.group({
       client: this.formBuilder.group({
-        f_name: ['', Validators.required],
-        l_name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        phoneNo: ['', Validators.required]
+        f_name: new FormControl('', Validators.required),
+        l_name: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        phoneNo: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')])
       }),
       clientAddress: this.formBuilder.group({
-        streetNo: ['', Validators.required],
-        streetName: ['', Validators.required],
-        town: ['', Validators.required],
-        city: ['', Validators.required],
-        postalCode: ['', Validators.required]
+        streetNo:new FormControl ('', [Validators.required,Validators.pattern('^[0-9]*$')]),
+        streetName:new FormControl ('', Validators.required),
+        town: new FormControl('', Validators.required),
+        city: new FormControl('', Validators.required),
+        postalCode:new FormControl ('', [Validators.required,Validators.pattern('^[0-9]*$')])
       }),
       invoice: this.formBuilder.group({
         totalAmount: ['0', Validators.required]
@@ -73,7 +73,7 @@ export class CreateComponent {
       items: this.formBuilder.array([
         this.createItem()
       ]),
-      type: ['', Validators.required]
+      type:new FormControl  ('', Validators.required)
     });
   }
 
@@ -83,9 +83,9 @@ export class CreateComponent {
 
   createItem(): FormGroup {
     return this.formBuilder.group({
-      desc: ['', Validators.required],
-      price: ['', Validators.required],
-      qty: ['', Validators.required]
+      desc:new FormControl  ('', Validators.required),
+      price: new FormControl ('', [Validators.required,Validators.pattern('^[0-9]*$')]),
+      qty: new FormControl ('', [Validators.required,Validators.pattern('^[0-9]*$')])
     });
   }
 

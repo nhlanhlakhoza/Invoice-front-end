@@ -200,6 +200,7 @@
 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form3'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+      <div *ngIf="invoices.length > 0"></div>
       <div *ngFor="let invoice of invoices">
         <div>
           <span style="text-align: left;">{{ '# ' + invoice.invoiceId }} . {{ invoice.date }}</span>
@@ -208,6 +209,9 @@
           <span style="text-align: right; float: inline-end;"> R {{ invoice.totalAmount || 'N/A' }}</span><br>
           <hr>
         </div>
+      </div>
+      <div *ngIf="invoices.length === 0">
+        <p>No items to display.</p>
       </div>
       <div id="orderStatisticsChart"></div>
     </div>
@@ -236,13 +240,21 @@
           
 
           <select [(ngModel)]="amountRange">
-            <option value="0 - 100">$0 - $100</option>
-            <option value="100 - 500">$100 - $500</option>
-            <option value="500 - 1000">$500 - $1000</option>
-            <!-- Add more options as needed -->
+            <option value="0 - 100">R0 - R100</option>
+            <option value="100 - 500">R100 - R500</option>
+            <option value="500 - 1000">R500 - R1,000</option>
+            <option value="1000 - 5000">R1,000 - R5,000</option>
+            <option value="5000 - 10000">R5,000 - R10,000</option>
+            <option value="10000 - 50000">R10,000 - R50,000</option>
+            <option value="50000 - 100000">R50,000 - R100,000</option>
+            <option value="100000 - 500000">R100,000 - R500,000</option>
+            <option value="500000 - 1000000">R500,000 - R1,000,000</option>
+            <option value="1000000 - 5000000">R1,000,000 - R5,000,000</option>
+            <option value="5000000 - 10000000">R5,000,000 - R10,000,000</option>
           </select>
-
-          <li style="margin-left: 10px;">
+<br>
+<br>
+    <li style="margin-left: 10px; margin-bottom: -50x;">
             <button (click)="applyFilter()">Apply Filter</button>
           </li>
         </div>

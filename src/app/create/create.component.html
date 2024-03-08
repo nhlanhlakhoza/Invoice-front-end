@@ -1,227 +1,375 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
-  data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-  <meta name="description" content="" />
+<html
+  lang="en"
+  class="light-style layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
+    <meta name="description" content="" />
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="/assets/css/demo.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
-  <!-- Vendors CSS -->
-  <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
 
-  <!-- Helpers -->
-  <script src="/assets/vendor/js/helpers.js"></script>
-  <!-- Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <script src="/assets/js/config.js"></script>
-</head>
+    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
 
-<body>
-  <!-- Layout wrapper -->
-  <div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/assets/css/demo.css" />
 
-      <!-- Layout container -->
-      <div class="layout-page">
-        <!-- Navbar -->
-        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-            <a routerLink="/dashboard" class="nav-item nav-link px-0 me-xl-4">
-              <strong class="rounded-background">X</strong>
-            </a>
-          </div>
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <!-- Search -->
-            <!-- /Search -->
+    <!-- Page CSS -->
 
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-              <!-- GitHub Button -->
-              <li class="nav-item lh-1 me-3">
-                <a class="github-button" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">
-                  <span>Invoice Or <br /><br /> Quotation</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+    <!-- Helpers -->
+    <script src="/assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/assets/js/config.js"></script>
+  </head>
 
-        <!-- Secondary Navbar -->
-        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-              <li [class.active]="activeMenuItem === 'home'">
-                <a (click)="setCurrentStep(1)">Invoice Information</a>
-              </li>
-              <li [class.active]="activeMenuItem === 'Client data'" style="margin-left: 40px;">
-                <a (click)="setCurrentStep(2)">Client data</a>
-              </li>
-              <li [class.active]="activeMenuItem === 'Items & payment'" style="margin-left: 45px;">
-                <a (click)="setCurrentStep(3)">Items & payment</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+     
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a routerLink="/dashboard" class="nav-item nav-link px-0 me-xl-4">
+                <strong class="rounded-background">X</strong>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+             
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-3">
+                  <a
+                    class="github-button"
+                    data-icon="octicon-star"
+                    data-size="large"
+                    data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    ><span>Invoice Or <br/><br/>
+                      Quotation</span></a
+                  >
+                </li>
+
+               
+              </ul>
+            </div>
+          </nav>
+
+        <nav
+          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+          id="layout-navbar">
+       
+          
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <li [class.active]="activeMenuItem === 'home'">
+                  <a (click)="setCurrentStep(1)">Invoice Information</a>
+                </li>
+                <li [class.active]="activeMenuItem === 'Client data'" style="margin-left: 40px;">
+                  <a (click)="setCurrentStep(2)">Client data</a>
+                </li>
+                <li [class.active]="activeMenuItem === 'Items & payment'" style="margin-left: 45px;">
+                  <a (click)="setCurrentStep(3)">Items & payment</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         
-        <!-- / Navbar -->
 
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
-          <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <!-- Form 1: Client Information -->
-              <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                <div class="card h-100">
-                  <div class="">
-                    <div class="">
-                      <form [formGroup]="formData" *ngIf="currentStep === 1"(ngSubmit)="nextStep()">
-                        <div formGroupName="client">
-                          <!-- Client Information Fields -->
-                          <label>First Name:</label>
-                          <input type="text" formControlName="f_name" required />
-                          <label>Last Name:</label>
-                          <input type="text" formControlName="l_name" required />
-                          <label>Email:</label>
-                          <input type="email" formControlName="email" required />
-                          <label>Phone Number:</label>
-                          <input type="text" formControlName="phoneNo" required />
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            
+
+            <div class="container-xxl flex-grow-1 container-p-y" >
+              
+              <div class="row">
+                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                  <div class="card h-100">
+
+                      <div class="">
+                        <div class="">
+                          <form [formGroup]="formData" *ngIf="currentStep === 1"(ngSubmit)="nextStep()">
+                            <div formGroupName="client">
+                              <!-- Client Information Fields -->
+                              <label>First Name:</label>
+                              <input type="text" style="margin-bottom: 25px;" formControlName="f_name" required />
+                              <div *ngIf="formData.get('client.f_name')?.invalid && formData.get('client.f_name')?.touched">
+                                <div *ngIf="formData.get('client.f_name')?.errors?.['required']" class="alert alert-danger">
+                                  First Name is required.
+                                </div>
+                              </div>
+                              
+                              
+                              <label>Last Name:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="l_name" required />
+                              <div *ngIf="formData.get('client.l_name')?.invalid && formData.get('client.l_name')?.touched">
+                                <div *ngIf="formData.get('client.l_name')?.errors?.['required']" class="alert alert-danger">
+                                  Last Name is required.
+                                </div>
+                              </div>
+                              
+                              <label>Email:</label>
+                              <input type="email"  style="margin-bottom: 25px;" formControlName="email" required />
+                              <div *ngIf="formData.get('client.email')?.invalid && formData.get('client.email')?.touched">
+                                <div *ngIf="formData.get('client.email')?.errors?.['required']"   class="alert alert-danger">Email is required. </div>
+                                <div *ngIf="formData.get('client.email')?.errors?.['email']"   class="alert alert-danger">Enter a valid Email Address. </div>
+                              </div>
+                              
+                              <label>Phone Number:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="phoneNo" required />
+                              <div *ngIf="formData.get('client.phoneNo')?.invalid && formData.get('client.phoneNo')?.touched">
+                                <div *ngIf="formData.get('client.phoneNo')?.errors?.['required']"   class="alert alert-danger">Phone Number is required.</div>
+                                <div *ngIf="formData.get('client.phoneNo')?.errors?.['pattern']"   class="alert alert-danger">A valid Phone Number is required.</div>
+                              </div>
+                            </div>
+                            <br>
+                            <button type="submit"  [disabled]="!formData.get('client')?.valid" class="button buttonBlue" >Continue
+                              <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                            </button>
+                          </form>
+
                         </div>
-                        <br>
-                        <button type="submit"  [disabled]="!formData.get('client')?.valid" class="button buttonBlue" >Continue
-                          <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                        </button>
-                      </form>
-                    </div>
-                    <div id="orderStatisticsChart"></div>
+                        <div id="orderStatisticsChart"></div>
+                      </div>
+                      
+                    
                   </div>
                 </div>
-              </div>
 
-              <!-- Form 2: Client Address -->
-              <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                <div class="card h-100">
-                  <div class="">
-                    <div class="">
-                      <form [formGroup]="formData" *ngIf="currentStep === 2"  (ngSubmit)="nextStep()">
-                        <div formGroupName="clientAddress">
-                          <!-- Client Address Fields -->
-                          <label>Street Number:</label>
-                          <input type="text" formControlName="streetNo" required />
-                          <label>Street Name:</label>
-                          <input type="text" formControlName="streetName" required />
-                          <label>Town:</label>
-                          <input type="text" formControlName="town" required />
-                          <label>City:</label>
-                          <input type="text" formControlName="city" required />
-                          <label>Postal Code:</label>
-                          <input type="text" formControlName="postalCode" required />
+
+                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                  <div class="card h-100">
+
+                      <div class="">
+                        <div class="">
+                          <form [formGroup]="formData" *ngIf="currentStep === 2"  (ngSubmit)="nextStep()">
+                            <div formGroupName="clientAddress">
+                              <!-- Client Address Fields -->
+                              <label>Street Number:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="streetNo" required />
+                              <div *ngIf="formData.get('clientAddress.streetNo')?.invalid && formData.get('clientAddress.streetNo')?.touched">
+                                <div *ngIf="formData.get('clientAddress.streetNo')?.errors?.['required']" class="alert alert-danger">street Number is required.</div>
+                                <div *ngIf="formData.get('clientAddress.streetNo')?.errors?.['pattern']" class="alert alert-danger">A valid Street Number is required.</div>
+                              </div>
+                              <label>Street Name:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="streetName" required />
+                              <div *ngIf="formData.get('clientAddress.streetName')?.invalid && formData.get('clientAddress.streetName')?.touched">
+                                <div *ngIf="formData.get('clientAddress.streetName')?.errors?.['required']" class="alert alert-danger">Street Name is required.</div>
+                                
+                              </div>
+                              <label>Town:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="town" required />
+                              <div *ngIf="formData.get('clientAddress.town')?.invalid && formData.get('clientAddress.town')?.touched">
+                                <div *ngIf="formData.get('clientAddress.town')?.errors?.['required']" class="alert alert-danger">Town Name is required.</div>
+                                
+                              </div>
+                              <label>City:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="city" required />
+                              <div *ngIf="formData.get('clientAddress.city')?.invalid && formData.get('clientAddress.city')?.touched">
+                                <div *ngIf="formData.get('clientAddress.city')?.errors?.['required']" class="alert alert-danger">City Name is required.</div>
+                                
+                              </div>
+
+                              <label>Postal Code:</label>
+                              <input type="text"  style="margin-bottom: 25px;" formControlName="postalCode" required />
+                              <div *ngIf="formData.get('clientAddress.postalCode')?.invalid && formData.get('clientAddress.postalCode')?.touched">
+                                <div *ngIf="formData.get('clientAddress.postalCode')?.errors?.['required']" class="alert alert-danger">street Number is required.</div>
+                                <div *ngIf="formData.get('clientAddress.postalCode')?.errors?.['pattern']" class="alert alert-danger">A valid Street Number is required.</div>
+                              </div>
+                            </div>
+                            <br>
+                            <button type="submit"  [disabled]="!formData.get('clientAddress')?.valid" class="button buttonBlue" >Continue
+                              <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                            </button>
+                          </form>
+
                         </div>
-                        <br>
-                        <button type="submit"  [disabled]="!formData.get('clientAddress')?.valid" class="button buttonBlue" >Continue
-                          <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                        </button>
-                      </form>
-                    </div>
-                    <div id="orderStatisticsChart"></div>
+                        <div id="orderStatisticsChart"></div>
+                      </div>
+                      
+                    
                   </div>
                 </div>
-              </div>
 
-              <!-- Form 3: Invoice and Quote Information -->
-              <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                <div class="card h-100">
-                  <div class="">
-                    <div class="">
-                      <form [formGroup]="formData" *ngIf="currentStep === 3"(ngSubmit)="onSubmit()">
+                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                  <div class="card h-100">
+
+                      <div class="">
+                        <div class="">
+                          <form [formGroup]="formData" *ngIf="currentStep === 3"(ngSubmit)="onSubmit()">
                         
-                        <!-- Items -->
-                        <div formArrayName="items">
-                          <div *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
-                            <label>Item Description:</label>
-                            <input type="text" formControlName="desc" required />
-                            <label>Price:</label>
-                            <input type="text" formControlName="price" required />
-                            <label>Quantity:</label>
-                            <input type="text" formControlName="qty" required />
+                            <!-- Items -->
+                            <div formArrayName="items">
+                              <div *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+                                <label>Item Description:</label>
+                                <input type="text"  style="margin-bottom: 25px;" formControlName="desc" required />
+                                <div *ngIf="items.controls[i].get('desc')?.errors && items.controls[i].get('desc')?.touched">
+                                  <div *ngIf="items.controls[i].get('desc')?.errors?.['required']" class="alert alert-danger">Description is required.</div>
+                                </div>
+                                <label>Price:</label>
+                                <input type="text" style="margin-bottom: 25px;" formControlName="price" required />
+                                <div *ngIf="items.controls[i].get('price')?.errors && items.controls[i].get('price')?.touched">
+                                  <div *ngIf="items.controls[i].get('price')?.errors?.['required']" class="alert alert-danger">Price is required.</div>
+                                  <div *ngIf="items.controls[i].get('qty')?.errors?.['pattern']" class="alert alert-danger">A valid Price is required.</div>
+                                </div>
+                                <label>Quantity:</label>
+                                <input type="text" style="margin-bottom: 25px;" formControlName="qty" required />
+                                <div *ngIf="items.controls[i].get('qty')?.errors && items.controls[i].get('qty')?.touched">
+                                  <div *ngIf="items.controls[i].get('qty')?.errors?.['required']" class="alert alert-danger">Quantity is required.</div>
+                                  <div *ngIf="items.controls[i].get('qty')?.errors?.['pattern']" class="alert alert-danger">A valid Quantity is required.</div>
+                                </div>
+                                <br>
+                                <br>
+                                <button type="button" (click)="removeItem(i)" class="buttons buttonBlues" style="margin-top: -30px;">Remove Item</button>
+                              </div>
+                            </div>
                             <br>
-                            <br>
-                            <button type="button" (click)="removeItem(i)">Remove Item</button>
-                          </div>
-                        </div>
-                        <br>
-                        <button type="button" (click)="addItem()">Add Item</button>
-                        <br>
-                        <br>
-                        <div>
+                            <button type="button" (click)="addItem()" class="buttons buttonBlues"style="margin-top: -125px; margin-left:150px ;">Add Item</button>
                           
-                          <label>Type:</label>
-                          <select formControlName="type" required>
-                            <option value="">Select Type</option>
-                            <option value="Invoice">Invoice</option>
-                            <option value="Quote">Quote</option>
-                          </select>
+                            <div>
+                              
+                              <label>Type:</label>
+                            <select style="margin-bottom: 25px;" formControlName="type" required>
+                              <option value="">Select Type</option>
+                             <option value="Invoice">Invoice</option>
+                                <option value="Quote">Quote</option>
+                                </select>
+
+                             <div *ngIf="formData.get('type')?.invalid && formData.get('type')?.touched">
+                               <div *ngIf="formData.get('type')?.errors?.['required']" class="alert alert-danger">Type is required.</div>
                         </div>
-                        <br>
-                        <button type="submit" [disabled]="!formData.valid" class="button buttonBlue">Create
-                          <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                        </button>
-                        <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
-                          {{ alertMessage }}
+                            </div>
+                            
+                            <button type="submit" [disabled]="!formData.valid" class="button buttonBlue">Create
+                              <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                            </button>
+                            <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+                              {{ alertMessage }}
+                            </div>
+                          </form>
                         </div>
-                      </form>
-                    </div>
-                    <div id="orderStatisticsChart"></div>
+                        <div id="orderStatisticsChart"></div>
+                      </div>
+                      
+                    
                   </div>
                 </div>
+
+
+                <!---->
+ 
               </div>
             </div>
+
+            <div class="container-xxl flex-grow-1 container-p-y" >
+              
+              <div class="row">
+               
+ 
+              </div>
+            </div>
+
+            <!--Items and Payments-->
+
+            <div class="container-xxl flex-grow-1 container-p-y" >
+              
+              <div class="row">
+                
+ 
+              </div>
+            </div>
+
+            <!--End Of Items-->
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
           </div>
-          <!-- / Content -->
-          <div class="content-backdrop fade"></div>
+          <!-- Content wrapper -->
         </div>
-        <!-- Content wrapper -->
+        <!-- / Layout page -->
       </div>
-      <!-- / Layout page -->
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-  </div>
-  <!-- / Layout wrapper -->
+    <!-- / Layout wrapper 
+    <div class="bottom-menu">
+      <div id="orderStatisticsChart"></div>
+      <ul>
+        <li><a style="color: grey;"routerLink="/dashboard" ><img src="assets/img/Dashboard.svg" style="margin-left: 8.5px; " class="menu-icon" > <br/> Home</a></li>
+        <li><a style="color: grey;"routerLink="/invoices" ><img src="assets/img/Document.svg" style="margin-left: 13px;" class="menu-icon"> <br/> Invoices</a></li>
+        <li><a style="color: grey;"routerLink="/quotations" ><img src="assets/img/User.svg" style="margin-left: 21px;" class="menu-icon"> <br/> Quotations</a></li>
+        <li><a style="color: grey;"routerLink="/create" ><img src="assets/img/User.svg" style="margin-left: 5px;" class="menu-icon"> <br/> Add</a></li>
 
-  <!-- Core JS -->
-  <script src="assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="assets/vendor/libs/popper/popper.js"></script>
-  <script src="assets/vendor/js/bootstrap.js"></script>
-  <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="assets/vendor/js/menu.js"></script>
+        <li>
+          <a routerLink="/settings" style="color: grey;">
+             <img src="assets/img/cog-outline.svg" style="margin-left: 13px;" class="menu-icon" > 
+            <br/> Settings
+          </a>
+        </li>
 
-  <!-- Vendors JS -->
-  <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+      </ul>
+    </div>-->
+   
 
-  <!-- Main JS -->
-  <script src="assets/js/main.js"></script>
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
 
-  <!-- Page JS -->
-  <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/vendor/js/menu.js"></script>
 
-  <!-- GitHub Button Script -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
+    <!-- endbuild -->
 
+    <!-- Vendors JS -->
+    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
 </html>

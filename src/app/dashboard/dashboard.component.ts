@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Quote } from '../quote';
 import { QuoteService } from '../quote.service';
+import { InvoiceService } from '../invoice.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
   totalInvoiceAmount: number = 0;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService, private invoiceService: InvoiceService)  { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
@@ -51,11 +52,13 @@ export class DashboardComponent implements OnInit {
 
        // Initial fetch of invoices when the component initializes
        this.fetchInvoices();
-       
+       this.fetchTotalUnpaidInvoices();
     } else {
       console.error('Token not found.');
     }
   }
+
+  
   fetchInvoices() {
     this.http.get<any[]>('http://localhost:8081/user/homeInvoices?email=' + this.email)
       .subscribe(
@@ -124,7 +127,17 @@ export class DashboardComponent implements OnInit {
         return this.quotes = quotes;
       });
   }
-
+fetchTotalUnpaidInvoices() {
+    this.invoiceService.getTotalUnpaid(this.email)
+      .subscribe(
+        (totalAmount: number) => {
+          this.totalInvoiceAmount = totalAmount;
+        },
+        error => {
+          console.error('Error fetching total unpaid amount of invoices:', error);
+        }
+      );
+  }
   }
   
 

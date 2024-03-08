@@ -127,11 +127,17 @@ applyFilter(): void {
                   const isInvoiceDateInRange = invoiceItemDate.isSameOrAfter(this.startDate) && invoiceItemDate.isSameOrBefore(this.endDate);
   
                   const isInvoiceAmountInRange = invoiceItem.totalAmount >= startAmount && invoiceItem.totalAmount <= endAmount;
-  
+                  
                   return isInvoiceDateInRange && isInvoiceAmountInRange;
+
+                  
                 });
               }
+               // After applying the filter, navigate back to form1
+               this.toggleForms('form1');
             },
+
+            
             error => {
               console.error('Error fetching quotes:', error);
             }

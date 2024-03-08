@@ -103,11 +103,13 @@
            </li>
   
            <li style="margin-left: 25px;">
-            <input type="text" placeholder="Search Quotations" >
+            <input type="text" placeholder="Search Quotations" [(ngModel)]="searchQuery" (input)="performSearch()">
+
            </li>
 
-           <li style="margin-left: 25px;">
-            <button>Filter</button>
+           
+           <li style="margin-left: 10px;">
+            <button (click)="toggleForms('form4')">Filter</button>
            </li>
               
 
@@ -131,28 +133,17 @@
                     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form1'">
                       <div class="">
                         <div class="">
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
+                          <div *ngFor="let quote of quotes">
+                          <span style=" text-align: left;"> #{{quote.id}} . {{ quote.date}}</span><br>
 
                           <label>Company Name</label>
 
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
+                          <span style=" text-align: right; float: inline-end;"> R {{quote.totalAmount}}</span><br>
 
                           <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
+                         
                           <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-
+                          </div>
                         </div>
                         <div id="orderStatisticsChart"></div>
                       </div>
@@ -199,7 +190,50 @@
                     </div>
                   </div>
                 </div>
- 
+                           <!-- Filtering -->
+<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
+  <div class="card h-100">
+    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+      <div class="">
+        <div class="">
+          <mat-form-field>
+            <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+          </mat-form-field>
+          
+
+          <select [(ngModel)]="amountRange">
+            <option value="0 - 100">R0 - R100</option>
+            <option value="100 - 500">R100 - R500</option>
+            <option value="500 - 1000">R500 - R1,000</option>
+            <option value="1000 - 5000">R1,000 - R5,000</option>
+            <option value="5000 - 10000">R5,000 - R10,000</option>
+            <option value="10000 - 50000">R10,000 - R50,000</option>
+            <option value="50000 - 100000">R50,000 - R100,000</option>
+            <option value="100000 - 500000">R100,000 - R500,000</option>
+            <option value="500000 - 1000000">R500,000 - R1,000,000</option>
+            <option value="1000000 - 5000000">R1,000,000 - R5,000,000</option>
+            <option value="5000000 - 10000000">R5,000,000 - R10,000,000</option>
+          </select>
+<br>
+<br>
+    <li style="margin-left: 10px; margin-bottom: -50x;">
+            <button (click)="applyFilter()">Apply Filter</button>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End of Filtering -->
               </div>
 
               <div class="scroll-container">
@@ -252,4 +286,3 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-
