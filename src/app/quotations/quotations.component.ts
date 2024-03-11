@@ -45,7 +45,6 @@ export class QuotationsComponent implements OnInit {
         }
       );
   }
-
   performSearch(): void {
     if (this.searchQuery.trim() === '') {
       this.fetchAllQuotes();
@@ -53,10 +52,12 @@ export class QuotationsComponent implements OnInit {
       this.quotes = this.quotes.filter(quote =>
         (quote.id && quote.id.toString().includes(this.searchQuery)) ||
         quote.date.includes(this.searchQuery) ||
-        (quote.totalAmount && quote.totalAmount.toString().includes(this.searchQuery))
+        (quote.totalAmount && quote.totalAmount.toString().includes(this.searchQuery)) ||
+        (quote.invoiceNo && quote.invoiceNo.toString().includes(this.searchQuery))
       );
     }
   }
+  
 
   applyFilter(): void {
     const amountRangeParts = this.amountRange.split(' - ');

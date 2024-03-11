@@ -176,52 +176,45 @@
 
               <div class="scroll-container">
 
-              <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
-
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex flex-column align-items-center gap-1">
-                          <span><strong style="text-decoration: underline;">Quotes</strong></span>
+                <div class="row">
+                  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                    <div class="card h-100">
+  
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                          <div class="d-flex flex-column align-items-center gap-1">
+                            <span><strong style="text-decoration: underline;">Quotes</strong></span>
+                            
+                          </div>
+                          <div id="orderStatisticsChart"></div>
                         </div>
-                        <div id="orderStatisticsChart"></div>
+                        <ul class="p-0 m-0">
+                          <div *ngIf="quotes.length > 0"></div>
+                          <li *ngFor="let quote of quotes" class="d-flex mb-4 pb-1">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">Aspire College</h6>
+                                <small class="text-muted">{{ quote.date }}</small>
+                              </div>
+                              <div class="user-progress">
+                                <small class="fw-medium">R{{quote.totalAmount }}</small>
+                              </div>
+                            </div>
+                          </li>
+                          <div *ngIf="quotes.length === 0">
+                            <p>No items to display.</p>
+                          </div>
+                        </ul>
+                        
+            
                       </div>
-
-                      <ul class="p-0 m-0">
-                        <div *ngIf="quotes.length > 0"></div>
-                        <li class="d-flex" *ngFor="let quote of quotes">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Aspire College</h6>
-                              <small class="text-muted">{{ quote.date }}</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-medium">R {{ quote.totalAmount }}</small>
-                            </div>
-                          </div>
-                          <br>
-                      <br>
-                      
-                        </li>
-                        <div *ngIf="quotes.length === 0">
-                          <p>No items to display.</p>
-                        </div>
-                      </ul>
-                      
                     </div>
                   </div>
+   
                 </div>
-                
- 
-              </div>
-
-              
-
-            </div>
 
               <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
@@ -292,7 +285,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+
   <router-outlet></router-outlet>
-</html>
+
 

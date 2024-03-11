@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import moment from 'moment';
+import { catchError, forkJoin, of } from 'rxjs';
 
 @Component({
   selector: 'app-invoices4',
@@ -42,28 +43,44 @@ endDate: any;
     this.currentForm = form;
   }
 
-  fetchCombinedItems() {
-    this.http.get<any[]>('http://localhost:8081/user/displayAllInvoices?email=' + this.email)
-      .subscribe(
-        invoices => {
-          this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
-            .subscribe(
-              quotes => {
-                // Combine invoices and quotes into one array
-                this.combinedItems = [...invoices, ...quotes];
-                // Sort the combined array by date
-                this.combinedItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-              },
-              error => {
-                console.error('Error fetching quotes:', error);
-              }
-            );
-        },
-        error => {
+  fetchCombinedItems(): void {
+    forkJoin([
+      this.http.get<any[]>('http://localhost:8081/user/displayAllInvoices?email=' + this.email).pipe(
+        catchError(error => {
           console.error('Error fetching invoices:', error);
-        }
-      );
+          return of([]); // Return an empty array if there's an error
+        })
+      ),
+      this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email).pipe(
+        catchError(error => {
+          console.error('Error fetching quotes:', error);
+          return of([]); // Return an empty array if there's an error
+        })
+      )
+    ]).subscribe(
+      ([invoices, quotes]) => {
+        // Combine invoices and quotes into one array
+        this.combinedItems = [...invoices, ...quotes];
+        // Sort the combined array by date in descending order
+        this.combinedItems.sort((a, b) => {
+          const dateA = new Date(this.convertToDate(a.date));
+          const dateB = new Date(this.convertToDate(b.date));
+          return dateB.getTime() - dateA.getTime();
+        });
+      },
+      error => {
+        console.error('Error fetching invoices or quotes:', error);
+        // Handle errors, such as displaying an error message to the user
+      }
+    );
   }
+  
+  convertToDate(dateString: string): string {
+    const [month, day, year] = dateString.split('/');
+    return `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year}`;
+  }
+  
+
  
  // Method to perform search/filtering
  performSearch(): void {

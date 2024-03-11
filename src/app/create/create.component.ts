@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface FormData {
   client: {
@@ -46,7 +47,8 @@ export class CreateComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -125,6 +127,13 @@ setActiveMenuItem(menuItem: string) {
         (response: any) => {
           console.log('Form data submitted successfully:', response);
           this.showAlertMessage('success', 'Form data submitted successfully:');
+
+          setTimeout(() => {
+           
+              // Refresh the page after 2 seconds
+              window.location.reload();
+            
+          }, 3000);
         },
         (error: any) => {
           console.error('Error submitting form data:', error);

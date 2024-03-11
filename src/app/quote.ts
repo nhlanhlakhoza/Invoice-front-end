@@ -3,5 +3,6 @@ export interface Quote {
     company: string;
     date: string;
     totalAmount: number;
+    invoiceNo:number
   }
   

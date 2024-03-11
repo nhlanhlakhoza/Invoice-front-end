@@ -117,7 +117,8 @@
                               <label>Email Address</label>
                               <input type="text" style="margin-bottom: 25px;" formControlName="email" id="email">
                               <div *ngIf="login['email'].invalid && (login['email'].dirty || login['email'].touched)" class="alert alert-danger">
-                                <span *ngIf="login['email'].errors?.['required']">Please enter a valid email</span>
+                                <span *ngIf="login['email'].errors?.['required']">email Address is required</span>
+                                <span *ngIf="login['email'].errors?.['email']">Please enter a valid email</span>
                               </div>
                             
                               <label>Password</label>

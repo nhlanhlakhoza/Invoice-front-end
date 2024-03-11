@@ -13,7 +13,7 @@ export class LoginComponent {
 
   loginForm: FormGroup = new FormGroup({
     id: new FormControl('0'),
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required,Validators.email]),
     password: new FormControl('', [Validators.required])
   });
 

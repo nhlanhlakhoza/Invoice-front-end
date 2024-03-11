@@ -135,7 +135,7 @@
                       <div>
                         <div>
                        
-                          <div *ngIf="combinedItems.length > 0">
+                          <div  *ngIf="combinedItems && combinedItems.length > 0">
                             <div *ngFor="let item of combinedItems">
                               <div [ngClass]="{'invoice-info': item.invoiceId, 'quote-info': !item.invoiceId}">
                                 <!-- Display draft class for quotes -->
