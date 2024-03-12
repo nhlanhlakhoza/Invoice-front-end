@@ -131,49 +131,53 @@
 
               <div class="row">
 
-                <!--Notifications-->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form2'">
-                  <div class="card h-100">
-                    <ol style="margin-bottom: 25px; margin-top: 25px;">
-                      <li>Notifications 1 <a style="color:#9570F1">View more</a></li>
-                      <li style="margin-top: 8px;">Invoice number #27 has been paid up <a style="color:#9570F1" routerLink="/invoices"><br>View more</a></li>
-                      <li style="margin-top: 8px;">Quotation number #27 has been been successfully added <a style="color:#9570F1" routerLink="/quotations"><br>View more</a></li>
-                      <li style="margin-top: 8px;">Notifications 1 <a style="color:#9570F1">View more</a></li>
-                      <li style="margin-top: 8px;">Notifications 1 <a style="color:#9570F1">View more</a></li>
-                      
-                    </ol>
+               <!-- Notifications -->
+  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form2'">
+    <div class="card h-100">
+     
+      <div style="margin-bottom: 25px; margin-top: 25px;">
+        <h2 style="margin-left: 10px;"> Notifications</h2>
+        <ol *ngIf="notifications.length > 0; else noNotifications">
+          <li *ngFor="let notification of notifications" style="margin-top: 8px;">
+            {{ notification.message }} <a style="color:#9570F1"  (click)="extractAndTransformMessage(notification)"><br>View more</a>
+          </li>
+        </ol>
+      </div>
+      <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: 10px;"
+              (click)="toggleForms('form1')">Back</button>
+    </div>
+  </div>
+  <ng-template #noNotifications>
+    <p>No notifications available.</p>
+  </ng-template>
+  <!-- End of Notifications -->
 
-                    <li style="margin-left: 28px; float: inline-end; margin-bottom: 10px;">
-                      <button style="background: #ECECEC;
-                      border: 0px;
-                      font-size: smaller;
-                      padding-top: 2.5px;
-                      padding-bottom: 2.5px;
-                      color:#5F5F5F;" (click)="toggleForms('form1')">Back</button>
-                     </li>
+   <!-- Show New Notification Message -->
+   <div *ngIf="newNotificationAdded" class="alert alert-success alert-dismissible fade show" role="alert">
+    New notification added!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismissNotification()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- End of New Notification Message -->
+<!-- Notifications Viewed -->
+<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
+  <div *ngIf="invoiceDetails; else loadingInvoiceDetails">
+    <h2>Invoice Details</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ invoiceDetails.date }}</li>
+      <li><strong>Amount:</strong> {{ invoiceDetails.totalAmount }}</li>
+      <!-- Add other properties of invoiceDetails as needed -->
+    </ul>
+  </div>
+  
+  <ng-template #loadingInvoiceDetails>
+    <p>Loading invoice details...</p>
+  </ng-template>
 
-                  </div>
-                </div>
-                <!--End of Notifications-->
-
-                <!--Notifications Viewed-->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
-                  <div class="card h-100">
-                    <span style="margin-left: 28px; margin-bottom: 25px;margin-top: 25px;">Invoice number #27 has been paid up, go to <a style="color:#9570F1" routerLink="/invoices"> invoices</a> to view more about paid and upaid invoices</span>
-                   
-
-                    <li style="margin-left: 28px; float: inline-end; margin-bottom: 10px;">
-                      <button style="background: #ECECEC;
-                      border: 0px;
-                      font-size: smaller;
-                      padding-top: 2.5px;
-                      padding-bottom: 2.5px;
-                      color:#5F5F5F;" (click)="toggleForms('form1')">Back</button>
-                     </li>
-
-                  </div>
-                </div>
-                <!--End of Notification Viewed-->
+  
+</div>
+<!-- End of Notification Viewed -->
 
 
                 
