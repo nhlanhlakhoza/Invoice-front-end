@@ -138,10 +138,16 @@
       <div style="margin-bottom: 25px; margin-top: 25px;">
         <h2 style="margin-left: 10px;"> Notifications</h2>
         <ol *ngIf="notifications.length > 0; else noNotifications">
-          <li *ngFor="let notification of notifications" style="margin-top: 8px;">
-            {{ notification.message }} <a style="color:#9570F1"  (click)="extractAndTransformMessage(notification)"><br>View more</a>
+          <li *ngFor="let notification of notifications" 
+              style="margin-top: 8px;" 
+              [ngClass]="{'new-notification':  isNewNotification, 'normal-notification': !isNewNotification}"
+              (click)="extractAndTransformMessage(notification)">
+            <span style="cursor: pointer;">
+              {{ notification.message }}
+            </span>
           </li>
         </ol>
+        
       </div>
       <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: 10px;"
               (click)="toggleForms('form1')">Back</button>
@@ -155,28 +161,84 @@
    <!-- Show New Notification Message -->
    <div *ngIf="newNotificationAdded" class="alert alert-success alert-dismissible fade show" role="alert">
     New notification added!
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismissNotification()">
+    <!--button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismissNotification()">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </button-->
   </div>
   <!-- End of New Notification Message -->
+
 <!-- Notifications Viewed -->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
-  <div *ngIf="invoiceDetails; else loadingInvoiceDetails">
+<div *ngIf="currentForm === 'form5'">
+  <ng-container *ngIf="transformedMessage.startsWith('Invoice number')">
+    <!-- Displaying Invoice Details -->
     <h2>Invoice Details</h2>
-    <ul>
-      <li><strong>ID:</strong> {{ invoiceDetails.date }}</li>
-      <li><strong>Amount:</strong> {{ invoiceDetails.totalAmount }}</li>
-      <!-- Add other properties of invoiceDetails as needed -->
-    </ul>
-  </div>
-  
-  <ng-template #loadingInvoiceDetails>
-    <p>Loading invoice details...</p>
-  </ng-template>
+    <div *ngIf="invoiceDetails">
+      <p><strong>Invoice Number:</strong> {{ invoiceDetails.invoiceNo }}</p>
+      <p><strong>Date:</strong> {{ invoiceDetails.date }}</p>
+      <h3>Items</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoiceDetails.items">
+            <td>{{ item.desc }}</td>
+            <td>{{ item.qty }}</td>
+            <td>R{{ item.price }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"><strong>Total Amount</strong></td>
+            <td>R{{ invoiceDetails.totalAmount }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ng-container>
+
 
   
+  <div *ngIf="currentForm === 'form5'">
+    <ng-container *ngIf="transformedMessage.startsWith('Quote number')">
+      <!-- Displaying Quote Details -->
+      <h2>Quote Details</h2>
+    
+      <div *ngIf="quoteDetails">
+        <p><strong>Quote Number:</strong> {{ quoteDetails.quoteNo }}</p>
+        <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
+        <h3>Items</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of quoteDetails.items">
+              <td>{{ item.desc }}</td>
+              <td>{{ item.qty }}</td>
+              <td>R{{ item.price }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Total Amount</strong></td>
+              <td>R{{ quoteDetails.totalAmount }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </ng-container>
+  </div>
 </div>
+
 <!-- End of Notification Viewed -->
 
 

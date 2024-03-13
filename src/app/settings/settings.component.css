@@ -8,4 +8,10 @@
     align-items: center;
     color: #ffffff; /* Set your desired text color */
 }
-
+.new-notification {
+    color: rgb(211, 50, 50); /* Change the color to the desired color for new notifications */
+  }
+  
+  .normal-notification {
+    color: rgb(63, 59, 59); /* Change the color to the normal color for viewed notifications */
+  }

@@ -35,7 +35,8 @@ export class SettingsComponent
   invoiceNumber!: number;
   invoiceDetails: any;
   errorMessage: string = '';
-
+  quoteNumber!:number;
+  quoteDetails: any;
 
   toggleForms(form: string) {
     this.currentForm = form;
@@ -103,14 +104,17 @@ get change (){return this.changeProfileForm.controls;}
     });
 }
 
-addNewNotification(newNotification: Notification) {
-  this.notifications.unshift(newNotification); // Add new notification to the beginning of the array
-  this.newNotificationAdded = true;
+// In your component class
+isNewNotification: boolean = false;
 
-  // Reset newNotificationAdded after a delay
+addNewNotification(newNotification: Notification) {
+  this.notifications.unshift(newNotification);
+  this.isNewNotification = true;
+
+  // After a certain time or when the notification is viewed
   setTimeout(() => {
-    this.newNotificationAdded = false;
-  }, 5000); // Reset after 5 seconds
+    this.isNewNotification = false;
+  }, 5000000); // Reset after 5 seconds
 }
 dismissNotification() {
   this.newNotificationAdded = false;
@@ -124,11 +128,19 @@ extractAndTransformMessage(notification: Notification): void {
   const parts: string[] = notification.message.split('#');
   if (parts.length > 1) {
     const numberPart: string = parts[1].split(' ')[0];
-    this.invoiceNumber = parseInt(numberPart);
-    if (!isNaN(this.invoiceNumber)) {
-      this.transformedMessage = `Invoice number: ${this.invoiceNumber}`;
-      this.getInvoiceDetails();
-      this.toggleForms('form5'); // Toggle to display invoice details
+    const extractedNumber: number = parseInt(numberPart);
+    if (!isNaN(extractedNumber)) {
+      if (notification.message.includes('Invoice')) {
+        this.invoiceNumber = extractedNumber;
+        this.transformedMessage = `Invoice number: ${this.invoiceNumber}`;
+        this.getInvoiceDetails();
+        this.toggleForms('form5'); // Toggle to display invoice details
+      } else if (notification.message.includes('Quote')) {
+        this.quoteNumber = extractedNumber;
+        this.transformedMessage = `Quote number: ${this.quoteNumber}`;
+        this.getQuoteDetails();
+        this.toggleForms('form5'); // Toggle to display quote details
+      }
     }
   } else {
     this.transformedMessage = 'Invalid notification message';
@@ -143,9 +155,22 @@ getInvoiceDetails(): void {
       this.invoiceDetails = response;
     },
     (error) => {
-      console.log(this.invoiceNumber);
       console.error('Error fetching invoice details:', error);
       this.errorMessage = 'Failed to fetch invoice details';
+    }
+  );
+}
+
+getQuoteDetails(): void {
+  const apiUrl = `http://localhost:8081/user/quote/${this.quoteNumber}`;
+  this.http.get<any>(apiUrl).subscribe(
+    (response) => {
+      console.log('Quote details:', response);
+      this.quoteDetails = response;
+    },
+    (error) => {
+      console.error('Error fetching quote details:', error);
+      this.errorMessage = 'Failed to fetch quote details';
     }
   );
 }
