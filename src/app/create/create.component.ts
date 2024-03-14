@@ -118,33 +118,40 @@ setActiveMenuItem(menuItem: string) {
   prevStep(): void {
     this.currentStep--;
   }
-  onSubmit(): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8081/user/createInvoiceOrQuote?email=${email}`;
-      this.http.post<any>(backendUrl, this.formData.value).subscribe(
-        (response: any) => {
-          console.log('Form data submitted successfully:', response);
-          this.showAlertMessage('success', 'Form data submitted successfully:');
 
+    // Flag to track form submission
+    submittingForm: boolean = false;
+
+
+    onSubmit(): void {
+      this.submittingForm = true; // Set submittingForm flag to true
+  
+      const token = localStorage.getItem('token');
+      if (token) {
+        const email = this.extractEmailFromToken(token);
+        const backendUrl = `http://localhost:8081/user/createInvoiceOrQuote?email=${email}`;
+        this.http.post<any>(backendUrl, this.formData.value).subscribe(
+          (response: any) => {
+            console.log('Invoice or Quote submitted successfully:', response);
+            this.showAlertMessage('success', 'Invoice or Quote submitted successfully:');
+            
           setTimeout(() => {
            
-              // Refresh the page after 2 seconds
-              window.location.reload();
-            
-          }, 3000);
-        },
-        (error: any) => {
-          console.error('Error submitting form data:', error);
-          console.log(backendUrl);
-          console.log(email);
-        }
-      );
-    } else {
-      console.error('Token not found.');
+            // Refresh the page after 3 seconds
+            window.location.reload();
+          
+        }, 3000);
+          },
+          (error: any) => {
+            console.error('Error submitting form data:', error);
+          }
+        ).add(() => {
+          this.submittingForm = false; // Set submittingForm flag to false when request completes
+        });
+      } else {
+        console.error('Token not found.');
+      }
     }
-  }
 
   extractEmailFromToken(token: string): string {
     if (token) {

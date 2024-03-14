@@ -99,7 +99,7 @@
 
             <ul class="navbar-nav flex-row align-items-center ms-auto">
            <li style="margin-left: 10px;">
-            <a  >All </a>
+            <a  (click)="toggleForms('form1')">All </a>
            </li>
   
            <li style="margin-left: 25px;">
@@ -134,7 +134,9 @@
                       <div class="">
                         <div class="">
                           <div *ngFor="let quote of quotes">
-                          <span style=" text-align: left;"> #{{quote.id}} . {{ quote.date}}</span><br>
+                            <span style="text-align: left; cursor: pointer;" (click)="getQuoteDetails(quote.quoteNo)">
+                              {{ '#' + quote.quoteNo }} . {{ quote.date }}
+                            </span><br>
 
                           <label>Company Name</label>
 
@@ -153,44 +155,9 @@
                 </div>
 
 
-                <!--Paid-->
-
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
-
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form2'">
-                      <div class="">
-                        <div class="">
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-
-                        </div>
-                        <div id="orderStatisticsChart"></div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
+               
                            <!-- Filtering -->
+                           
 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
@@ -234,8 +201,60 @@
 </div>
 
 <!-- End of Filtering -->
-              </div>
 
+<!-- Displaying details -->
+<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
+  <div class="card h-100">
+    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+      <div class="">
+        <div class="">
+      <!-- Displaying Invoice Details -->
+      <h2>Quotation Details</h2>
+      <div *ngIf="quoteDetails">
+        <p><strong>Invoice Number:</strong> {{quoteDetails.quoteNo }}</p>
+        <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
+        <h3><strong>Client Details</strong></h3>
+        <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{quoteDetails.client.l_name }}</p>
+        <p><strong>Email:</strong> {{quoteDetails.client.email }}</p>
+        <p><strong>Phone Number:</strong> {{quoteDetails.client.phoneNo }}</p>
+      
+        <h3><strong>Client Address</strong></h3>
+        <p><strong>Street:</strong> {{quoteDetails.clientAddress.streetNo }} {{quoteDetails.clientAddress.streetName }}</p>
+        <p><strong>Town:</strong> {{quoteDetails.clientAddress.town }}</p>
+        <p><strong>City:</strong> {{quoteDetails.clientAddress.city }}</p>
+        <p><strong>Postal Code:</strong> {{quoteDetails.clientAddress.postalCode }}</p>
+        <h3>Items</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of quoteDetails.items">
+              <td>{{ item.desc }}</td>
+              <td>{{ item.qty }}</td>
+              <td>R{{ item.price }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Total Amount</strong></td>
+              <td>R{{quoteDetails.totalAmount }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+              </div>
+            </div>
+
+             <!-- End Displaying Invoice Details -->
+          </div>
               <div class="scroll-container">
 
               

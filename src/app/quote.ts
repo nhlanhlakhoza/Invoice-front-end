@@ -4,5 +4,6 @@ export interface Quote {
     date: string;
     totalAmount: number;
     invoiceNo:number
+    quoteNo:number;
   }
   

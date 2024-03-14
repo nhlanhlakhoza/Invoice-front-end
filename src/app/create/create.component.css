@@ -59,4 +59,17 @@ ul {
   }
 
  
-
+  .form-container {
+    position: relative;
+  }
+  
+  .spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.spinner-border {
+  width: 3rem; /* Adjust the width */
+  height: 3rem; /* Adjust the height */
+}  

@@ -20,6 +20,8 @@ startDate: any;
 endDate: any;
   invoices: any[] = [];
   totalInvoiceAmount: any;
+  invoiceDetails: any;
+  quoteDetails: any;
 
   constructor(private http: HttpClient) {}
 
@@ -91,8 +93,8 @@ endDate: any;
   } else {
     // If not empty, filter combined items based on search query
     this.combinedItems = this.combinedItems.filter(item =>
-      (item.invoiceId && item.invoiceId.toString().includes(this.searchQuery)) || // Search by invoiceId for invoices
-      (item.id && item.id.toString().includes(this.searchQuery)) || // Search by id for quotes
+      (item.invoiceNo && item.invoiceNo.toString().includes(this.searchQuery)) || // Search by invoiceId for invoices
+      (item.qouteNo && item.qouteNo.toString().includes(this.searchQuery)) || // Search by id for quotes
       item.date.includes(this.searchQuery) || // Search by date for both
       item.totalAmount?.toString().includes(this.searchQuery) // Search by totalAmount for both
     );
@@ -118,6 +120,9 @@ applyFilter(): void {
             quotes => {
               // Combine invoices and quotes
               const combinedItems = [...invoices, ...quotes];
+
+              // Sort combinedItems in descending order by date
+              combinedItems.sort((a, b) => moment(b.date, 'M/D/YYYY').diff(moment(a.date, 'M/D/YYYY')));
 
               // Filter items based on date range and amount range
               this.combinedItems = combinedItems.filter(item => {
@@ -146,15 +151,12 @@ applyFilter(): void {
                   const isInvoiceAmountInRange = invoiceItem.totalAmount >= startAmount && invoiceItem.totalAmount <= endAmount;
                   
                   return isInvoiceDateInRange && isInvoiceAmountInRange;
-
-                  
                 });
               }
-               // After applying the filter, navigate back to form1
-               this.toggleForms('form1');
+              
+              // After applying the filter, navigate back to form1
+              this.toggleForms('form1');
             },
-
-            
             error => {
               console.error('Error fetching quotes:', error);
             }
@@ -166,12 +168,12 @@ applyFilter(): void {
     );
 }
 
-
-
 fetchInvoices() {
   this.http.get<any[]>('http://localhost:8081/user/displayAllInvoices?email=' + this.email)
     .subscribe(
       invoices => {
+        // Sort invoices by date in descending order
+        invoices.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         this.invoices = invoices || [];
       },
       error => {
@@ -180,6 +182,39 @@ fetchInvoices() {
     );
 }
 
+getInvoiceDetails(invoiceNo: number): void {
+  const apiUrl = `http://localhost:8081/user/invoice/${invoiceNo}`;
+  this.http.get<any>(apiUrl).subscribe(
+    (response) => {
+
+      console.log('Invoice details:', response);
+      this.invoiceDetails = response;
+      this.toggleForms('form5'); 
+    },
+    (error) => {
+      console.error('Error fetching invoice details:', error);
+      // Handle error, display error message to the user, etc.
+    }
+  );
+}
+getQuoteDetails(quoteNo: number): void {
+  const apiUrl = `http://localhost:8081/user/quote/${quoteNo}`; // Use the passed quoteNo parameter
+  this.http.get<any>(apiUrl).subscribe(
+    (response) => {
+      console.log('Quote details:', response);
+      this.quoteDetails = response;
+      this.toggleForms('form6'); 
+    },
+    (error) => {
+      console.error('Error fetching quote details:', error);
+    }
+  );
+}
+showButtons: boolean = true;
+
+toggleButtons(item: any): void {
+  this.showButtons = !this.showButtons;
+}
 }
 
 

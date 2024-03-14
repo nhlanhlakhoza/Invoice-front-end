@@ -15,3 +15,17 @@
   .normal-notification {
     color: rgb(63, 59, 59); /* Change the color to the normal color for viewed notifications */
   }
+  .form-container {
+    position: relative;
+  }
+  
+  .spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.spinner-border {
+  width: 3rem; /* Adjust the width */
+  height: 3rem; /* Adjust the height */
+}  

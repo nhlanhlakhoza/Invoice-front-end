@@ -16,6 +16,7 @@ export class QuotationsComponent implements OnInit {
   startDate: moment.Moment | null = null;
   endDate: moment.Moment | null = null;
   amountRange: string = '';
+  quoteDetails: any;
 
   constructor(private http: HttpClient) {}
 
@@ -38,19 +39,21 @@ export class QuotationsComponent implements OnInit {
     this.http.get<Quote[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
       .subscribe(
         quotes => {
-          this.quotes = quotes || [];
+          // Sort quotes array in descending order by date
+          this.quotes = quotes.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         },
         error => {
           console.error('Error fetching quotes:', error);
         }
       );
   }
+  
   performSearch(): void {
     if (this.searchQuery.trim() === '') {
       this.fetchAllQuotes();
     } else {
       this.quotes = this.quotes.filter(quote =>
-        (quote.id && quote.id.toString().includes(this.searchQuery)) ||
+        (quote.quoteNo && quote.quoteNo.toString().includes(this.searchQuery)) ||
         quote.date.includes(this.searchQuery) ||
         (quote.totalAmount && quote.totalAmount.toString().includes(this.searchQuery)) ||
         (quote.invoiceNo && quote.invoiceNo.toString().includes(this.searchQuery))
@@ -63,22 +66,47 @@ export class QuotationsComponent implements OnInit {
     const amountRangeParts = this.amountRange.split(' - ');
     const startAmount = parseFloat(amountRangeParts[0]);
     const endAmount = parseFloat(amountRangeParts[1]);
-
-    // Filter quotes based on date range and amount range
-    this.quotes = this.quotes.filter(quote => {
-      const quoteDate = moment(quote.date, 'M/D/YYYY');
-      const isDateInRange = !this.startDate || !this.endDate || 
-                            (quoteDate.isSameOrAfter(this.startDate) && quoteDate.isSameOrBefore(this.endDate));
-      const isAmountInRange = isNaN(startAmount) || isNaN(endAmount) || 
-                              (quote.totalAmount >= startAmount && quote.totalAmount <= endAmount);
-      return isDateInRange && isAmountInRange;
-    });
-
-    // After applying the filter, navigate back to form1
-    this.toggleForms('form1');
+  
+    // Fetch quotes
+    this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
+      .subscribe(
+        quotes => {
+          // Filter quotes based on date range and amount range
+          this.quotes = quotes.filter(quote => {
+            const quoteDate = moment(quote.date, 'M/D/YYYY');
+            const isDateInRange = !this.startDate || !this.endDate || 
+                                  (quoteDate.isSameOrAfter(this.startDate) && quoteDate.isSameOrBefore(this.endDate));
+            const isAmountInRange = isNaN(startAmount) || isNaN(endAmount) || 
+                                    (quote.totalAmount >= startAmount && quote.totalAmount <= endAmount);
+            return isDateInRange && isAmountInRange;
+          });
+  
+          // After applying the filter, navigate back to form1
+          this.toggleForms('form1');
+        },
+        error => {
+          console.error('Error fetching quotes:', error);
+        }
+      );
   }
+  
 
   toggleForms(form: string): void {
     this.currentForm = form;
   }
+
+  getQuoteDetails(quoteNo: number): void {
+    const apiUrl = `http://localhost:8081/user/quote/${quoteNo}`; // Use the passed quoteNo parameter
+    this.http.get<any>(apiUrl).subscribe(
+      (response) => {
+        console.log('Quote details:', response);
+        this.quoteDetails = response;
+        this.toggleForms('form5'); 
+      },
+      (error) => {
+        console.error('Error fetching quote details:', error);
+      }
+    );
+  }
+  
 }
