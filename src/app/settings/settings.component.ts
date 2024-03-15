@@ -237,8 +237,8 @@ export class SettingsComponent implements OnInit {
       const backendUrl = `http://localhost:8081/user/quotes/${this.quoteNumber}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
-          console.log('Invoice or Quote submitted successfully:', response);
-          this.showAlertMessage('success', 'Invoice or Quote submitted successfully:');
+          console.log('Quotation updated successfully', response);
+          this.showAlertMessage('success', 'Quotation updated successfully');
 
           setTimeout(() => {
            

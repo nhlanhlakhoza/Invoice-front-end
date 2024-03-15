@@ -130,7 +130,12 @@
                               <button type="submit"  [disabled]="forgot_password['invalid']" class="button buttonBlue">Submit
                                   <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                                 </button>
-
+                                             <!-- Loading spinner -->
+             <div *ngIf="submittingForm" class="spinner-container">
+              <div class="spinner-border text-primary" role="status">
+               <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
                                 <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
                                   {{ alertMessage }}
                                 </div>

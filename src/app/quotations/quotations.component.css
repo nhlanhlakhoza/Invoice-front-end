@@ -1,16 +1,36 @@
-button{
-    background: #ECECEC;
-    border: 0px;
-    font-size: smaller;
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-    color:#5F5F5F;
-    border-radius: 2px;
-
-    
-
-}
 
 .bottom-menu ul li a:hover {
     pointer-events: none; /* Disable pointer events */
   }
+
+  .custom-btn {
+    margin-left: 28px;
+    float: right;
+    margin-bottom: -10px;
+    margin-top: 10px;
+    background-color: #9570F1;
+    /* Add any additional styles as needed */
+}
+.filter{
+  background: #ECECEC;
+  border: 0px;
+  font-size: smaller;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+  color:#5F5F5F;
+  border-radius: 2px;
+
+}
+.filter-btn{
+  background-color: #9570F1;
+}
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.spinner-border {
+width: 3rem; /* Adjust the width */
+height: 3rem; /* Adjust the height */
+}  

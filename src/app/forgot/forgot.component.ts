@@ -22,7 +22,7 @@ export class ForgotComponent {
   }
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-
+  submittingForm: boolean = false;
   sendData() {
     if (this.forgotForms.valid) {
       const email = this.forgotForms.get('email')?.value;
@@ -30,7 +30,7 @@ export class ForgotComponent {
       const data = {
         email: email
       };
-
+      this.submittingForm = true;
       this.http.post<any>('http://localhost:8081/forgotPassword', data)
         .subscribe(
           response => {
@@ -43,7 +43,9 @@ export class ForgotComponent {
             this.showAlertMessage('error', 'Error sending reset password request. Please ensure the email you entered is correct.');
             // Handle error as needed
           }
-        );
+        ).add(() => {
+          this.submittingForm = false;
+        });
     } else {
       this.showAlertMessage('error', 'Please enter a valid email address.');
     }

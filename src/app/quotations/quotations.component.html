@@ -109,7 +109,7 @@
 
            
            <li style="margin-left: 10px;">
-            <button (click)="toggleForms('form4')">Filter</button>
+            <button class="filter"(click)="toggleForms('form4')">Filter</button>
            </li>
               
 
@@ -175,8 +175,8 @@
             <mat-datepicker #endDatePicker></mat-datepicker>
           </mat-form-field>
           
-
-          <select [(ngModel)]="amountRange">
+          
+          <select  [(ngModel)]="amountRange" >
             <option value="0 - 100">R0 - R100</option>
             <option value="100 - 500">R100 - R500</option>
             <option value="500 - 1000">R500 - R1,000</option>
@@ -191,9 +191,9 @@
           </select>
 <br>
 <br>
-    <li style="margin-left: 10px; margin-bottom: -50x;">
-            <button (click)="applyFilter()">Apply Filter</button>
-          </li>
+    <div style="margin-left: 10px; margin-bottom: -50x;">
+            <button class="btn btn-secondary filter-btn" (click)="applyFilter()">Apply Filter</button>
+    </div> 
         </div>
       </div>
     </div>
@@ -246,6 +246,10 @@
             </tr>
           </tfoot>
         </table>
+        
+        <button class="btn btn-secondary custom-btn" (click)="toggleForms('form6')">Edit Quote</button>
+
+
       </div>
     </div>
   </div>
@@ -255,6 +259,187 @@
 
              <!-- End Displaying Invoice Details -->
           </div>
+
+          <!--the forms-->
+          <div *ngIf="currentForm === 'form6'">
+
+            <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+              <div class="card h-100">
+
+                  <div class="">
+                    <div class="">
+                      <form [formGroup]="formData"(ngSubmit)="nextStep()">
+                        <div formGroupName="client">
+                          <!-- Client Information Fields -->
+                          <label>First Name:</label>
+                          <input type="text" style="margin-bottom: 25px;" formControlName="f_name" required />
+                          <div *ngIf="formData.get('client.f_name')?.invalid && formData.get('client.f_name')?.touched">
+                            <div *ngIf="formData.get('client.f_name')?.errors?.['required']" class="alert alert-danger">
+                              First Name is required.
+                            </div>
+                          </div>
+                          
+                          
+                          <label>Last Name:</label>
+                          <input type="text"  style="margin-bottom: 25px;" formControlName="l_name" required />
+                          <div *ngIf="formData.get('client.l_name')?.invalid && formData.get('client.l_name')?.touched">
+                            <div *ngIf="formData.get('client.l_name')?.errors?.['required']" class="alert alert-danger">
+                              Last Name is required.
+                            </div>
+                          </div>
+                          
+                          <label>Email:</label>
+                          <input type="email"  style="margin-bottom: 25px;" formControlName="email" required />
+                          <div *ngIf="formData.get('client.email')?.invalid && formData.get('client.email')?.touched">
+                            <div *ngIf="formData.get('client.email')?.errors?.['required']"   class="alert alert-danger">Email is required. </div>
+                            <div *ngIf="formData.get('client.email')?.errors?.['email']"   class="alert alert-danger">Enter a valid Email Address. </div>
+                          </div>
+                          
+                          <label>Phone Number:</label>
+                          <input type="text"  style="margin-bottom: 25px;" formControlName="phoneNo" required />
+                          <div *ngIf="formData.get('client.phoneNo')?.invalid && formData.get('client.phoneNo')?.touched">
+                            <div *ngIf="formData.get('client.phoneNo')?.errors?.['required']"   class="alert alert-danger">Phone Number is required.</div>
+                            <div *ngIf="formData.get('client.phoneNo')?.errors?.['pattern']"   class="alert alert-danger">A valid Phone Number is required.</div>
+                          </div>
+                        </div>
+                        <br>
+                        <button type="submit"  (click)="toggleForms('form7')"  [disabled]="!formData.get('client')?.valid"class="button buttonBlue" >Continue
+                          <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                        </button>
+                      </form>
+
+                    </div>
+                    <div id="orderStatisticsChart"></div>
+                  </div>
+                  
+                
+              </div>
+            </div>
+
+
+
+          </div>
+        <!-- the end o form-->
+        <div *ngIf="currentForm === 'form7'">
+
+          <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+            <div class="card h-100"  style="border-bottom: 2px; border-color: #9570F1;">
+
+                <div class="">
+                  <div class="">
+                    <form [formGroup]="formData" (ngSubmit)="nextStep()">
+                      <div formGroupName="clientAddress">
+                        <!-- Client Address Fields -->
+                        <label>Street Number:</label>
+                        <input type="text"  style="margin-bottom: 25px;" formControlName="streetNo" required />
+                        <div *ngIf="formData.get('clientAddress.streetNo')?.invalid && formData.get('clientAddress.streetNo')?.touched">
+                          <div *ngIf="formData.get('clientAddress.streetNo')?.errors?.['required']" class="alert alert-danger">street Number is required.</div>
+                          <div *ngIf="formData.get('clientAddress.streetNo')?.errors?.['pattern']" class="alert alert-danger">A valid Street Number is required.</div>
+                        </div>
+                        <label>Street Name:</label>
+                        <input type="text"  style="margin-bottom: 25px;" formControlName="streetName" required />
+                        <div *ngIf="formData.get('clientAddress.streetName')?.invalid && formData.get('clientAddress.streetName')?.touched">
+                          <div *ngIf="formData.get('clientAddress.streetName')?.errors?.['required']" class="alert alert-danger">Street Name is required.</div>
+                          
+                        </div>
+                        <label>Town:</label>
+                        <input type="text"  style="margin-bottom: 25px;" formControlName="town" required />
+                        <div *ngIf="formData.get('clientAddress.town')?.invalid && formData.get('clientAddress.town')?.touched">
+                          <div *ngIf="formData.get('clientAddress.town')?.errors?.['required']" class="alert alert-danger">Town Name is required.</div>
+                          
+                        </div>
+                        <label>City:</label>
+                        <input type="text"  style="margin-bottom: 25px;" formControlName="city" required />
+                        <div *ngIf="formData.get('clientAddress.city')?.invalid && formData.get('clientAddress.city')?.touched">
+                          <div *ngIf="formData.get('clientAddress.city')?.errors?.['required']" class="alert alert-danger">City Name is required.</div>
+                          
+                        </div>
+
+                        <label>Postal Code:</label>
+                        <input type="text"  style="margin-bottom: 25px;" formControlName="postalCode" required />
+                        <div *ngIf="formData.get('clientAddress.postalCode')?.invalid && formData.get('clientAddress.postalCode')?.touched">
+                          <div *ngIf="formData.get('clientAddress.postalCode')?.errors?.['required']" class="alert alert-danger">street Number is required.</div>
+                          <div *ngIf="formData.get('clientAddress.postalCode')?.errors?.['pattern']" class="alert alert-danger">A valid Street Number is required.</div>
+                        </div>
+                      </div>
+                      <br>
+                      <button type="submit" (click)="toggleForms('form8')"  class="button buttonBlue" >Continue
+                        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                      </button>
+                    </form>
+
+                  </div>
+                  <div id="orderStatisticsChart"></div>
+                </div>
+                
+              
+            </div>
+          </div>
+        </div>
+        <!-- the end o form-->
+        <div *ngIf="currentForm === 'form8'">
+          <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+            <div class="card h-100"  style="border-bottom: 2px; border-color: #9570F1;">
+
+                <div class="">
+                  <div class="">
+                    <form [formGroup]="formData" (ngSubmit)="onSubmit(quoteDetails.quoteNo)">
+                      <!-- Items -->
+                      <div formArrayName="items">
+                        <div *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+                          <label>Item Description:</label>
+                          <input type="text"  style="margin-bottom: 25px;" formControlName="desc" required />
+                          <div *ngIf="items.controls[i].get('desc')?.errors && items.controls[i].get('desc')?.touched">
+                            <div *ngIf="items.controls[i].get('desc')?.errors?.['required']" class="alert alert-danger">Description is required.</div>
+                          </div>
+                          <label>Price:</label>
+                          <input type="text" style="margin-bottom: 25px;" formControlName="price" required />
+                          <div *ngIf="items.controls[i].get('price')?.errors && items.controls[i].get('price')?.touched">
+                            <div *ngIf="items.controls[i].get('price')?.errors?.['required']" class="alert alert-danger">Price is required.</div>
+                            <div *ngIf="items.controls[i].get('qty')?.errors?.['pattern']" class="alert alert-danger">A valid Price is required.</div>
+                          </div>
+                          <label>Quantity:</label>
+                          <input type="text" style="margin-bottom: 25px;" formControlName="qty" required />
+                          <div *ngIf="items.controls[i].get('qty')?.errors && items.controls[i].get('qty')?.touched">
+                            <div *ngIf="items.controls[i].get('qty')?.errors?.['required']" class="alert alert-danger">Quantity is required.</div>
+                            <div *ngIf="items.controls[i].get('qty')?.errors?.['pattern']" class="alert alert-danger">A valid Quantity is required.</div>
+                          </div>
+                          <br>
+                          <br>
+                          <button type="button" (click)="removeItem(i)" class="buttons buttonBlues" style="margin-top: -30px;">Remove Item</button>
+                        </div>
+                      </div>
+                      <br>
+                      <button type="button" (click)="addItem()" class="buttons buttonBlues"style="margin-top: -125px; margin-left:150px ;">Add Item</button>
+                    
+                      
+                        
+                      
+
+                    
+                      
+                      
+                      <button type="submit"  [disabled]="submittingForm"[disabled]="!formData.valid" class="button buttonBlue">Update Quote
+                        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                      </button>
+                           <!-- Loading spinner -->
+             <div *ngIf="submittingForm" class="spinner-container">
+              <div class="spinner-border text-primary" role="status">
+               <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+                      <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+                        {{ alertMessage }}
+                      </div>
+                    </form>
+                  </div>
+                  <div id="orderStatisticsChart"></div>
+                </div>
+                
+              
+            </div>
+          </div>
+        </div>
               <div class="scroll-container">
 
               
