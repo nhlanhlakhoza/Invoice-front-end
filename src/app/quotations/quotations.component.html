@@ -176,7 +176,8 @@
           </mat-form-field>
           
           
-          <select  [(ngModel)]="amountRange" >
+          <select class="form-select" [(ngModel)]="amountRange">
+            <option value="">Select Amount Range</option>
             <option value="0 - 100">R0 - R100</option>
             <option value="100 - 500">R100 - R500</option>
             <option value="500 - 1000">R500 - R1,000</option>

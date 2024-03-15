@@ -127,7 +127,7 @@
 
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" [ngClass]="{'fade-out': submittingForm}">
               <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form1'">
                   <div class="card h-100">
@@ -168,6 +168,8 @@
                     </div>
                   </div>
                 </div>
+             
+            
               
             
               
@@ -257,7 +259,8 @@
           </mat-form-field>
           
 
-          <select [(ngModel)]="amountRange">
+          <select class="form-select" [(ngModel)]="amountRange">
+            <option value="">Select Amount Range</option>
             <option value="0 - 100">R0 - R100</option>
             <option value="100 - 500">R100 - R500</option>
             <option value="500 - 1000">R500 - R1,000</option>
@@ -270,6 +273,7 @@
             <option value="1000000 - 5000000">R1,000,000 - R5,000,000</option>
             <option value="5000000 - 10000000">R5,000,000 - R10,000,000</option>
           </select>
+          
 <br>
 <br>
     <div style="margin-left: 10px; margin-bottom: -50x;">

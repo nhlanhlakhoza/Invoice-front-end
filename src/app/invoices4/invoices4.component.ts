@@ -110,7 +110,9 @@ export class Invoices4Component implements OnInit {
 
   dateRange: string = '';
   amountRange: string = '';
-
+  selectAmountRange(range: string): void {
+    this.amountRange = range; // Set the selected amount range
+  }
   applyFilter(): void {
     const amountRangeParts = this.amountRange.split(' - ');
     const startAmount = parseFloat(amountRangeParts[0]);
