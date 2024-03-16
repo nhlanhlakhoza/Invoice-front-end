@@ -28,6 +28,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { DatePipe } from '@angular/common';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,8 @@ import { DatePipe } from '@angular/common';
     Home1Component,
     UserComponent,
     PasswordChangeSettingComponent,
-    QuoteListComponent
+    QuoteListComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +62,10 @@ import { DatePipe } from '@angular/common';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule, // Import the MatNativeDateModule
-    MatInputModule
+    MatInputModule,
     
-
+    MatDialogModule,
+    MatButtonModule,
 
   ],
   providers: [

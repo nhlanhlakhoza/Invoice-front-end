@@ -94,16 +94,18 @@
           </div>
         </nav>
         <div *ngIf="profileImage">
-        <img [src]="profileImage" class="imageCentering" width="178px" height="178px">
+          <img [src]="profileImage" class="imageCentering" width="178px" height="178px">
         </div>
-        <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none" >
+        
+        <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none">
+        
         <img 
-        src="assets/img/Group 2.svg" 
-        width="30px" 
-        height="30px" 
-        class="add-image" 
-        (click)="fileInput.click()">
-
+          src="assets/img/Group 2.svg" 
+          width="30px" 
+          height="30px" 
+          class="add-image" 
+          (click)="confirmAction()">
+        
           
             <div class="content-wrapper">
               <!-- Content -->

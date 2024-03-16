@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -8,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: any;
   usernames: string = '';
   fullName: string = '';
   email: string = '';
@@ -19,8 +22,15 @@ export class ProfileComponent implements OnInit {
   alertType!: string;
   showAlert!: boolean;
   alertMessage!: string;
+  showPrompt: boolean = false;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+  
+
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
@@ -40,35 +50,19 @@ export class ProfileComponent implements OnInit {
         id: ['0'],
         fullName: [this.fullName, [Validators.required]],
         username: [this.usernames, [Validators.required]],
-        phone_number: [this.phone_number, [Validators.required,Validators.pattern('[0-9]{10}')]],
-        email: [this.email, [Validators.required,Validators.email]],
-       // password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
-      //  confirm_password: ['', [Validators.required]],
-      },// {
-        //validators: this.MustMatch('password', 'confirm_password')
-     // }
-      );
+        phone_number: [this.phone_number, [Validators.required, Validators.pattern('[0-9]{10}')]],
+        email: [this.email, [Validators.required, Validators.email]],
+      });
     } else {
       console.error('Token not found.');
     }
+
+    this.fileInput = document.createElement('input');
+    this.fileInput.type = 'file';
+    this.fileInput.style.display = 'none';
+    this.fileInput.addEventListener('change', (event: any) => this.onFileSelected(event));
+    document.body.appendChild(this.fileInput);
   }
-
-  MustMatch(password: any, confirm_password: any) {
-    return (formGroup: FormGroup) => {
-      const passwordcontrol = formGroup.controls[password];
-      const confirm_passwordcontrol = formGroup.controls[confirm_password];
-
-      if (confirm_passwordcontrol.errors && !confirm_passwordcontrol.errors['MustMatch']) {
-        return;
-      }
-      if (passwordcontrol.value !== confirm_passwordcontrol.value) {
-        confirm_passwordcontrol.setErrors({ 'MustMatch': true });
-      } else {
-        confirm_passwordcontrol.setErrors(null);
-      }
-    }
-  }
-
 
   fetchProfilePictureByEmail(email: string) {
     this.http.get('http://localhost:8081/user/displayProfileImage', {
@@ -88,9 +82,6 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  addImage: string = 'assets/img/Group 2.svg';
-  imageUrl!: string | ArrayBuffer | null;
-
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -101,18 +92,13 @@ export class ProfileComponent implements OnInit {
         this.profileImage = reader.result;
       };
       this.updateProfile();
-    }
+    } 
   }
 
   get change() {
     return this.profileForm.controls;
   }
-  // Method to check if passwords match
-  passwordsMatch(): boolean {
-    const password = this.profileForm.get('password')?.value;
-    const confirm_password = this.profileForm.get('confirm_password')?.value;
-    return password === confirm_password;
-  }
+
   updateProfile() {
     const formData = new FormData();
   
@@ -131,7 +117,7 @@ export class ProfileComponent implements OnInit {
       },
       error => {
         console.error('Error updating profile:', error);
-        this.showAlertMessage('error', 'Sorry, please verify all the field');
+        this.showAlertMessage('error', 'Sorry, please verify all the fields');
       }
     );
   }
@@ -145,4 +131,48 @@ export class ProfileComponent implements OnInit {
       this.showAlert = false;
     }, 5000);
   }
-}
+
+  confirmAction(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'remove') {
+        // Set default profile image
+     this.profileImage = 'assets/img/default.jpg';
+     this.removeProfile();
+     
+    
+      } else if (result === 'upload') {
+        // Handle file upload logic here
+        // Handle file upload logic here
+        if (this.fileInput) {
+          this.fileInput.nativeElement.click();
+        }
+      }
+    });
+  }
+
+  removeProfile() {
+    const url = 'http://localhost:8081/update-image?email=' + this.email;
+  
+    this.http.post(url, null).subscribe(
+      () => {
+        // Image removed successfully
+        console.log('Image removed successfully');
+        // Update UI or perform other actions as needed
+      },
+      (error) => {
+        // Handle error
+        console.error('Error removing image:', error);
+        // Display error message or handle the error accordingly
+      }
+    );
+  }
+  
+  
+  
+  }
+  
+
