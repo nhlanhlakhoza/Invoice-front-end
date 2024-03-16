@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   phone_number: string = '';
   file!: File;
   profileForm!: FormGroup;
-  profileImage: any = 'assets/img/default.jpg';
+  profileImage: any = 'assets/img/default2.jpg';
   message: string = '';
   alertType!: string;
   showAlert!: boolean;
@@ -140,7 +140,7 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'remove') {
         // Set default profile image
-     this.profileImage = 'assets/img/default.jpg';
+     this.profileImage = 'assets/img/default2.jpg';
      this.removeProfile();
      
     
