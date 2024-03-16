@@ -16,7 +16,7 @@ import { Home1Component } from './home1/home1.component';
 import { UserComponent } from './user/user.component';
 import { PasswordChangeSettingComponent } from './password-change-setting/password-change-setting.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
-import { PdfDownloadComponent } from './pdf-download/pdf-download.component';
+
 
 
 const routes: Routes = [
@@ -37,7 +37,7 @@ const routes: Routes = [
   {path :'user',component:UserComponent},
   {path:'changePasswordSetting',component:PasswordChangeSettingComponent},
   {path :'quate',component:QuoteListComponent},
-  {path :'pdf',component:PdfDownloadComponent}
+  
 ];
 
 @NgModule({

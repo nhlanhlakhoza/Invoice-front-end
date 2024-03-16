@@ -1,0 +1,16 @@
+
+.action-button {
+    margin-left: 40px;
+    margin-top:-10px;
+  }
+ 
+  .dialog-title {
+    margin-left: 30px;
+  }
+  .card-container {
+    width: 40x; /* Set the width of the card container */
+    padding: 20px; /* Add padding inside the card */
+    background-color: #ce2727; /* Set the background color of the card */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+  }

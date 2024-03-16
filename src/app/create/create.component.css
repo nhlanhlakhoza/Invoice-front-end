@@ -73,3 +73,14 @@ ul {
   width: 3rem; /* Adjust the width */
   height: 3rem; /* Adjust the height */
 }  
+
+.rounded-background {
+  width: 20px;
+  height: 20px;
+  background-color: #9570F1; /* Set your desired background color */
+  border-radius: 50%; /* Use 50% for a circle, adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff; /* Set your desired text color */
+}
