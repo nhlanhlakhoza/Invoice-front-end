@@ -1,13 +1,8 @@
 export class Invoice {
-    id: number;
-    totalAmount: number;
-  date: Date;
-  customer: string;
+    id!: number;
+    totalAmount!: number;
+  date!: Date;
+  customer!: string;
+  paymentStatus!: string;
 
-  constructor(id: number, totalAmount: number, date: Date, customer: string) {
-    this.id = id;
-    this.totalAmount =totalAmount;
-    this.date = date;
-    this.customer = customer;
-  }
 }

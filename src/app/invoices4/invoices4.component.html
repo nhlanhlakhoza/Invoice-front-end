@@ -128,46 +128,59 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y" [ngClass]="{'fade-out': submittingForm}">
-              <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form1'">
-                  <div class="card h-100">
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
-                      <div *ngIf="submittingForm; else dataContent">
-                        <!-- Show loading spinner or message while data is being fetched -->
-                        <div class="text-center">
-                          <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                          <p>Loading data...</p>
-                        </div>
-                      </div>
-                      <ng-template #dataContent>
-                        <div>
-                          <div>
-                            <div *ngIf="combinedItems && combinedItems.length > 0">
-                              <div *ngFor="let item of combinedItems">
-                                <div [ngClass]="{'invoice-info': item.invoiceId, 'quote-info': !item.invoiceId}">
-                                  <!-- Display draft class for quotes -->
-                                  <span *ngIf="!item.invoiceId" style="text-align: left; float: inline-end;" class="draft"> Draft</span>
-                                  <span style="text-align: left; cursor: pointer;" (click)="getInvoiceDetails(item.invoiceNo)" (click)="getQuoteDetails(item.quoteNo)">
-                                    #{{ item.invoiceNo || item.quoteNo || 'N/A' }} . {{ item.date }}
-                                  </span>
-                                  <span *ngIf="item.invoiceId" style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
-                                  <label>Company Name</label>
-                                  <span style="text-align: right; float: inline-end;"> R {{ item.totalAmount || 'N/A' }}</span><br>
-                                  <hr>
-                                </div>
-                              </div>
-                            </div>
-                            <div *ngIf="combinedItems.length === 0">
-                              <p>No items to display.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </ng-template>
+  <div class="row">
+    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form1'">
+      <div class="card h-100">
+        <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
+          <div *ngIf="submittingForm; else dataContent">
+            <!-- Show loading spinner or message while data is being fetched -->
+            <div class="text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p>Loading data...</p>
+            </div>
+          </div>
+          <ng-template #dataContent>
+            <div>
+              <div>
+                <div *ngIf="combinedItems && combinedItems.length > 0">
+                  <div *ngFor="let item of combinedItems">
+                    <div [ngClass]="{'invoice-info': item.invoiceId, 'quote-info': !item.invoiceId}">
+                      <!-- Display draft class for quotes -->
+                      <span *ngIf="!item.invoiceId" style="text-align: left; float: inline-end;" class="draft"> Draft</span>
+                      
+                      <span style="text-align: left; cursor: pointer;" (click)="getInvoiceDetails(item.invoiceNo)" (click)="getQuoteDetails(item.quoteNo)">
+                        #{{ item.invoiceNo || item.quoteNo || 'N/A' }} . {{ item.date }}
+                      </span>
+                      <span *ngIf="item.invoiceId && item.paymentStatus === 'Paid'" style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span><br>
+                      <span *ngIf="item.invoiceId && item.paymentStatus === 'unpaid'"  style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
+                      <label>Company Name</label>
+                      <span style="text-align: right; float: inline-end;"> R {{ item.totalAmount || 'N/A' }}</span><br>
+                      <hr>
                     </div>
                   </div>
                 </div>
+                <div *ngIf="combinedItems.length === 0">
+                  <p>No items to display.</p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  
+           
+            
+              
+         
+            
+             
+            
+             
+            
+            
              
             
               
@@ -176,39 +189,28 @@
           
 
                 <!--PAID-->
-
                 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form2'">
                   <div class="card h-100">
-
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
-                      <div class="">
-                        <div class="">
-                          
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="paid"> Paid</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-                          <span style=" text-align: left;"> #27 . 10/Jun/2022</span>
-                          <span style=" text-align: left; float: inline-end;" class="paid"> Paid</span><br>
-
-                          <label>Company Name</label>
-
-                          <span style=" text-align: right; float: inline-end;"> R 23 000.00</span><br>
-
-                          <hr>
-
+                    <div class="card-body" style="border-bottom: 2px solid #9570F1;">
+                      <div *ngIf="paidInvoices.length > 0; else noInvoices">
+                        <div>
+                          <div *ngFor="let invoice of paidInvoices">
+                            <span style="text-align: left; cursor: pointer;" (click)="getInvoiceDetails(invoice.invoiceNo)">{{ '#' + invoice.invoiceNo }} . {{ invoice.date }}</span>
+                            <span style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span><br>
+                            <label>Company Name</label>
+                            <span style="text-align: right; float: right;">R {{ invoice.totalAmount }}</span><br>
+                            <hr>
+                          </div>
                         </div>
-                        <div id="orderStatisticsChart"></div>
                       </div>
-                      
+                      <ng-template #noInvoices>
+                        <p>No paid invoices found.</p>
+                      </ng-template>
                     </div>
+                    <div id="orderStatisticsChart"></div>
                   </div>
                 </div>
-
+                
                 <!--END OF-->
 <!--Unpaid-->
 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form3'">
@@ -224,7 +226,7 @@
           </span>
           <span style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
           <label>Company Name</label>
-          <span style="text-align: right; float: inline-end;"> R {{ invoice.totalAmount || 'N/A' }}</span><br>
+          <span style="text-align: right; float: inline-end;"> R {{invoice.totalAmount}}</span><br>
           <hr>
         
          
@@ -279,7 +281,9 @@
 <br>
     <div style="margin-left: 10px; margin-bottom: -50x;">
             <button class="btn btn-secondary filter-btn"(click)="applyFilter()">Apply Filter</button>
+
     </div>
+    
         </div>
       </div>
     </div>

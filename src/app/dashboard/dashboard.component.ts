@@ -29,10 +29,15 @@ export class DashboardComponent implements OnInit {
   invoices: any[] = [];
 
   totalInvoiceAmount: number = 0;
+  sliderValue: number = 0;
+  intervalId: any;
+  selectedOption: 'invoices' | 'other' = 'invoices';
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService, private invoiceService: InvoiceService)  { }
 
   ngOnInit(): void {
+     // Start automatic slider motion on component initialization
+     this.startSliderMotion();
     const token = localStorage.getItem('token');
    
     if (token) {
@@ -137,6 +142,28 @@ fetchTotalUnpaidInvoices() {
           console.error('Error fetching total unpaid amount of invoices:', error);
         }
       );
+  }
+  ngOnDestroy(): void {
+    // Stop slider motion on component destruction to prevent memory leaks
+    this.stopSliderMotion();
+  }
+
+  // Dummy method to simulate fetching total invoice amount
+  fetchTotalInvoiceAmount(): void {
+    // Example: Fetch total invoice amount from backend API
+    this.totalInvoiceAmount = 5000; // Assuming the total amount is 5000
+  }
+
+  // Start motion for the slider
+  startSliderMotion(): void {
+    this.intervalId = setInterval(() => {
+      this.sliderValue = (this.sliderValue + 1) % 101; // Loop from 0 to 100
+    }, 2000); // Change the interval time (in milliseconds) as needed
+  }
+
+  // Stop motion for the slider
+  stopSliderMotion(): void {
+    clearInterval(this.intervalId);
   }
   }
   
