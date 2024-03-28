@@ -76,6 +76,7 @@
                  <!-- Dropdown menu -->
                  <div class="dropdown" (click)="toggleDropdown($event)">
                   <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" aria-expanded="false">
+                    
                     <div style="margin-right: 10px;" class="username">{{ usernames }}</div> <!-- Display the username -->
                     <div *ngIf="profileImage" class="profile-circle">
                       <img [src]="profileImage" alt="Profile Picture" class="profile-image">
@@ -113,11 +114,14 @@
                         <div class="card-body">
                           <h2 style="color: white;">Welcome back, <br/> {{ usernames }}!</h2>
                         <div style="background-color: white; border-radius: 10px;text-align: center; border-bottom: 10px solid black;">
-                     
+                          <div *ngIf="balance !== undefined">
+                            <p>Balance: R {{ balance }}</p>
+                          </div>
                             <p style="font-size: 10px; margin-top: 30px;">TOTAL INVOICES</p> 
                             <div *ngIf="totalInvoiceAmount !== undefined">
                           <h1 style="font-weight: bold;color: black;">R {{ totalInvoiceAmount }}</h1>
                         </div>
+                       
                           <a routerLink ="/invoices" class="btn btn-sm btn-outline-primary">View Invoices</a>
                         </div>
                         </div>
@@ -154,11 +158,12 @@
                           </div>
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div class="me-2">
-                              <h6 class="mb-0">Aspire College</h6>
+                              <h6 class="mb-0">{{invoice.companyName}}</h6>
                               <small class="text-muted">{{ invoice.date }}</small>
                             </div>
                             <div class="user-progress">
                               <small class="fw-medium">R{{ invoice.totalAmount }}</small>
+                             
                             </div>
                           </div>
                         </li>
@@ -196,7 +201,7 @@
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                               <div class="me-2">
-                                <h6 class="mb-0">Aspire College</h6>
+                                <h6 class="mb-0">{{quote.companyName}}</h6>
                                 <small class="text-muted">{{ quote.date }}</small>
                               </div>
                               <div class="user-progress">

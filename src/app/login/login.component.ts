@@ -28,8 +28,10 @@ export class LoginComponent {
   user: User = new User();
 
   constructor(private loginuserservice: LoginuserService, private router: Router) { }
-
-  RegisterUser() {   
+  // Flag to track form submission
+  submittingForm: boolean = false;
+  LoginUser(){   
+    this.submittingForm = true; // Set submittingForm flag to true
       this.user = Object.assign(this.user, this.loginForm.value);
       console.log("submitted", this.loginForm);
       
@@ -49,7 +51,9 @@ export class LoginComponent {
           // Error handling for failed login
           this.showAlertMessage('error', 'Sorry, please enter correct email and password');
         }
-      );
+      ).add(() => {
+        this.submittingForm = false; // Set submittingForm flag to false when request completes
+      });
   }
 
   showAlertMessage(type: string, message: string) {

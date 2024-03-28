@@ -72,8 +72,11 @@
 
                       <div class="">
                         <div class="">
-                          <form [formGroup]="registerForm" (ngSubmit)="SignUser()">
+                      
+
+                          <form [formGroup]="registerForm"  *ngIf="currentForm === 'register'">
                             <label>Full Name</label>
+                      
                             <input type="text" formControlName="fullName" style="margin-bottom: 25px;">
                             <div *ngIf="register['fullName'].invalid && (register['fullName'].dirty || register['fullName'].touched)" class="alert alert-danger">
                               <span *ngIf="register['fullName'].errors?.['required']">Full name is required</span>
@@ -118,16 +121,89 @@
                                       <div *ngIf="register['confirm_password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
                                         </div>
               
-                            <button type="submit" [disabled]="registerForm.invalid" class="button buttonBlue">
-                              Register
+                            <button type="submit" [disabled]="registerForm.invalid" class="button buttonBlue" (click)="toggleForms('company')">
+                              Continue
                               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                             </button>
+                            <!--a (click)= "toggleForms('company')">Do you have a registered company?</a-->
+                            Already have an account? <a routerLink="/login" style="color: #9570F1;">Sign in</a>
+
               
                             <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
                               {{ alertMessage }}
                             </div>
                           </form>
-                        
+                       
+                          <form [formGroup]="companyForm" *ngIf="currentForm === 'company'" (ngSubmit)="SignUser()">
+                            <label>Company Name</label>
+                            <input type="text" formControlName="companyName" style="margin-bottom: 25px;">
+                            <div *ngIf="company['companyName'].invalid && (company['companyName'].dirty || company['companyName'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['companyName'].errors?.['required']">Company name is required</span>
+                            </div>
+                          
+                            <label>City</label>
+                            <input type="text" formControlName="city" style="margin-bottom: 25px;">
+                            <div *ngIf="company['city'].invalid && (company['city'].dirty || company['city'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['city'].errors?.['required']">City is required</span>
+                              <span *ngIf="company['city'].errors?.['city']">Please enter a valid city</span>
+                            </div>
+                          
+                            <label>Postal Code</label>
+                            <input type="text" formControlName="postal_code" style="margin-bottom: 25px;">
+                            <div *ngIf="company['postal_code'].invalid && (company['postal_code'].dirty || company['postal_code'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['postal_code'].errors?.['required']">Postal code is required</span>
+                              <span *ngIf="company['postal_code'].errors?.['pattern']">Invalid postal code</span>
+                            </div>
+                          
+                            <label>Street Name</label>
+                            <input type="text" formControlName="street_name" style="margin-bottom: 25px;">
+                            <div *ngIf="company['street_name'].invalid && (company['street_name'].dirty || company['street_name'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['street_name'].errors?.['required']">Street name is required</span>
+                              <span *ngIf="company['street_name'].errors?.['pattern']">Invalid Street name </span>
+                            </div>
+                          
+                            <label>Street No</label>
+                            <input type="text" formControlName="streetNo" style="margin-bottom: 25px;">
+                            <div *ngIf="company['streetNo'].invalid && (company['streetNo'].dirty || company['streetNo'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['streetNo'].errors?.['required']">Street number is required</span>
+                              <span *ngIf="company['streetNo'].errors?.['pattern']">Invalid Street number </span>
+                            </div>
+                          
+                            <label>Town</label>
+                            <input type="text" formControlName="town" style="margin-bottom: 25px;">
+                            <div *ngIf="company['town'].invalid && (company['town'].dirty || company['town'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['town'].errors?.['required']">Town is required</span>
+                              <span *ngIf="company['town'].errors?.['pattern']">Invalid town </span>
+                            </div>
+                            <label>Email</label>
+                            <input type="text" formControlName="email" style="margin-bottom: 25px;">
+                            <div *ngIf="company['email'].invalid && (company['email'].dirty || company['email'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['email'].errors?.['required']">Email is required</span>
+                              <span *ngIf="company['email'].errors?.['email']">Enter a valid Email Address </span>
+                            </div>
+                            <label>Tax Number</label>
+                            <input type="text" formControlName="taxNo" style="margin-bottom: 25px;">
+                            <div *ngIf="company['taxNo'].invalid && (company['taxNo'].dirty || company['taxNo'].touched)" class="alert alert-danger">
+                              <span *ngIf="company['taxNo'].errors?.['required']">Tax Number is required</span>
+                              <span *ngIf="company['taxNo'].errors?.['pattern']">Enter valid tax Number </span>
+                            </div>
+                            <button type="submit" [disabled]="companyForm.invalid"class="button buttonBlue" >
+                              Register
+                              <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                            </button>
+                                <!-- Loading spinner -->
+                   <div *ngIf="submittingForm" class="spinner-container">
+                    <div class="spinner-border text-primary" role="status">
+                     <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                            <a (click)="toggleForms('register')">Back</a>
+                            <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+                              {{ alertMessage }}
+                            </div>
+                          </form>
+                          
+
 
                         </div>
                       </div>

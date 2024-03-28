@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   sliderValue: number = 0;
   intervalId: any;
   selectedOption: 'invoices' | 'other' = 'invoices';
+  balance!: number;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService, private invoiceService: InvoiceService)  { }
 
@@ -58,6 +59,7 @@ export class DashboardComponent implements OnInit {
        // Initial fetch of invoices when the component initializes
        this.fetchInvoices();
        this.fetchTotalUnpaidInvoices();
+       this.getBalance();
     } else {
       console.error('Token not found.');
     }
@@ -164,6 +166,25 @@ fetchTotalUnpaidInvoices() {
   // Stop motion for the slider
   stopSliderMotion(): void {
     clearInterval(this.intervalId);
+  }
+
+  getBalance(): void {
+    if (!this.email) {
+      console.error('Email is required.');
+      return;
+    }
+
+    this.http.get<number>(`http://localhost:8081/user/getBalance?email=${this.email}`).subscribe(
+      balance => {
+        console.log('Balance:', balance);
+        // Handle the balance data as needed, such as displaying it in the UI
+        this.balance = balance; // Assign the fetched balance to the component variable
+      },
+      error => {
+        console.error('Error fetching balance:', error);
+        // Handle the error, such as displaying an error message
+      }
+    );
   }
   }
   

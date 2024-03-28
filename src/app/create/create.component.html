@@ -277,7 +277,21 @@
                                <div *ngIf="formData.get('type')?.errors?.['required']" class="alert alert-danger">Type is required.</div>
                         </div>
                             </div>
-
+                            <div *ngIf="businessInfoResponse; else noCompany" style="display: none;">
+                              <!-- Display the selected company name within an input field -->
+                              <div>
+                                <label for="companyName">Company Name:</label>
+                                <input type="text" id="companyName" [value]="selectedCompanyName" formControlName="companyName" readonly>
+                              </div>
+                            </div>
+                            
+                            <!-- Else block for no company -->
+                            <ng-template #noCompany>
+                              <div>
+                                <p>No company available.</p>
+                              </div>
+                            </ng-template>
+                            
 
                             <button type="submit" [disabled]="!formData.valid" [disabled]="submittingForm" class="button buttonBlue">Create
                               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>

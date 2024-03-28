@@ -154,7 +154,7 @@
     </div>
   </div>
   <ng-template #noNotifications>
-    <p>No notifications available.</p>
+    <p> No notifications available.</p>
   </ng-template>
   <!-- End of Notifications -->
 
@@ -179,6 +179,7 @@
         <div *ngIf="invoiceDetails">
           <p><strong>Invoice Number:</strong> {{ invoiceDetails.invoiceNo }}</p>
           <p><strong>Date:</strong> {{ invoiceDetails.date }}</p>
+          <p><strong>Payment Status:</strong> {{ invoiceDetails.paymentStatus }}</p>
           <h3><strong>Client Details</strong></h3>
           <p><strong>Name:</strong> {{ invoiceDetails.client.f_name }} {{ invoiceDetails.client.l_name }}</p>
           <p><strong>Email:</strong> {{ invoiceDetails.client.email }}</p>
@@ -189,7 +190,7 @@
           <p><strong>Town:</strong> {{ invoiceDetails.clientAddress.town }}</p>
           <p><strong>City:</strong> {{invoiceDetails.clientAddress.city }}</p>
           <p><strong>Postal Code:</strong> {{ invoiceDetails.clientAddress.postalCode }}</p>
-          <h3>Items</h3>
+          <h3><strong>Items</strong></h3>
           <table class="table table-bordered">
             <thead>
               <tr>

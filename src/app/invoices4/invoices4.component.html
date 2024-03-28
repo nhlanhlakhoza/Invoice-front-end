@@ -155,7 +155,7 @@
                       </span>
                       <span *ngIf="item.invoiceId && item.paymentStatus === 'Paid'" style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span><br>
                       <span *ngIf="item.invoiceId && item.paymentStatus === 'unpaid'"  style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
-                      <label>Company Name</label>
+                      <label>{{item.companyName}}</label>
                       <span style="text-align: right; float: inline-end;"> R {{ item.totalAmount || 'N/A' }}</span><br>
                       <hr>
                     </div>
@@ -197,7 +197,7 @@
                           <div *ngFor="let invoice of paidInvoices">
                             <span style="text-align: left; cursor: pointer;" (click)="getInvoiceDetails(invoice.invoiceNo)">{{ '#' + invoice.invoiceNo }} . {{ invoice.date }}</span>
                             <span style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span><br>
-                            <label>Company Name</label>
+                            <label>{{invoice.companyName}}</label>
                             <span style="text-align: right; float: right;">R {{ invoice.totalAmount }}</span><br>
                             <hr>
                           </div>
@@ -225,7 +225,7 @@
             {{ '#' + invoice.invoiceNo }} . {{ invoice.date }}
           </span>
           <span style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
-          <label>Company Name</label>
+          <label>{{invoice.companyName}}</label>
           <span style="text-align: right; float: inline-end;"> R {{invoice.totalAmount}}</span><br>
           <hr>
         

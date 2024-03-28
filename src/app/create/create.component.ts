@@ -2,7 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Company } from '../company';
+interface BusinessInfoResponse {
+  id: number;
+  companyName: string;
+  streetNo: string;
+  streetName: string;
+  town: string;
+  postalCode: number;
+  taxNo: string;
+  email: string;
+  city: string;
+}
 interface FormData {
   client: {
     f_name: string;
@@ -29,6 +40,7 @@ interface FormData {
     qty: string;
   }[];
   type: string;
+  companyName:string;
 }
 
 
@@ -44,7 +56,10 @@ export class CreateComponent {
   alertMessage!: string;
   alertType!: string;
   showAlert!: boolean;
-
+  companyNames: string[] = [];
+  selectedCompanyName: string = ''; // Initialize the property
+  businessInfoList: Company[] = []; // Change the type to Company[]
+  email: any;
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -52,6 +67,16 @@ export class CreateComponent {
   ) {}
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const tokenParts = token.split('.');
+      const decodedPayload = JSON.parse(atob(tokenParts[1]));
+      this.email = decodedPayload.email;
+    } else {
+      console.error('Token not found.');
+    }
+    this.fetchBusinessInfo();
     this.formData = this.formBuilder.group({
       client: this.formBuilder.group({
         f_name: new FormControl('', Validators.required),
@@ -75,7 +100,8 @@ export class CreateComponent {
       items: this.formBuilder.array([
         this.createItem()
       ]),
-      type:new FormControl  ('', Validators.required)
+      type:new FormControl  ('', Validators.required),
+      companyName: [this.selectedCompanyName, Validators.required] // Initialize companyName with selectedCompanyName and apply required validator
     });
   }
 
@@ -118,7 +144,33 @@ setActiveMenuItem(menuItem: string) {
   prevStep(): void {
     this.currentStep--;
   }
+  // Assuming this is within your component class
+  businessInfoResponse!: BusinessInfoResponse; // Assuming you have a property to store the JSON response
 
+fetchBusinessInfo(): void {
+  this.http.get<BusinessInfoResponse>('http://localhost:8081/user/email/' + this.email)
+    .subscribe(
+      (response: BusinessInfoResponse) => {
+        this.businessInfoResponse = response; // Store the JSON response
+        this.selectedCompanyName = response.companyName; // Set selectedCompanyName from the response
+        this.formData.get('companyName')?.setValue(this.selectedCompanyName); // Update companyName form control
+        console.log(this.selectedCompanyName); // Log the selected company name
+      },
+      error => {
+        console.error('Error fetching business information:', error);
+      }
+    );
+}
+  
+  
+
+  getCompanyName(): string {
+    if (this.businessInfoList.length > 0) {
+      return this.businessInfoList[0].companyName; // Assuming you want to display the first company name
+    } else {
+      return ''; // Return an empty string if businessInfoList is empty
+    }
+  }
     // Flag to track form submission
     submittingForm: boolean = false;
 

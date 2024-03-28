@@ -137,6 +137,7 @@
                           *ngIf="change['username'].invalid && (change['username'].dirty || change['username'].touched)"
                           class="alert alert-danger">
                           <span *ngIf="change['username'].errors?.['required']">User name is required</span>
+                          <span *ngIf="change['username'].errors?.['maxlength']" >user Name must be less or 10 characters.</span>
                            </div>
 
                            <label>Email Address</label>

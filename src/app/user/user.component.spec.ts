@@ -37,6 +37,8 @@ interface FormData {
 })
 export class UserComponent implements OnInit {
   formData!: FormGroup;
+nextStep: any;
+prevStep: any;
 
   constructor(
     private formBuilder: FormBuilder,

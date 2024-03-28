@@ -6,5 +6,6 @@ export interface Quote {
     invoiceNo:number
     quoteNo:number;
     paymentStatus:string;
+    companyName:string;
   }
   

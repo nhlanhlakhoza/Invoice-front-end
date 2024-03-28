@@ -84,3 +84,7 @@ ul {
   align-items: center;
   color: #ffffff; /* Set your desired text color */
 }
+.buttons{
+margin-top: 25px;
+display:inline-block;
+}

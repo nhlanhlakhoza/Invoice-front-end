@@ -32,6 +32,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { PaymentSatusComponent } from './payment-satus/payment-satus.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,8 @@ import { MatSliderModule } from '@angular/material/slider';
     UserComponent,
     PasswordChangeSettingComponent,
     QuoteListComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PaymentSatusComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatDialogModule,
     MatButtonModule,
     MatSliderModule,
-
+    MatSnackBarModule,
   ],
   providers: [
     provideClientHydration(),

@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm = this.formBuilder.group({
         id: ['0'],
         fullName: [this.fullName, [Validators.required]],
-        username: [this.usernames, [Validators.required]],
+        username: [this.usernames, [Validators.required,Validators.maxLength(10)]],
         phone_number: [this.phone_number, [Validators.required, Validators.pattern('[0-9]{10}')]],
         email: [this.email, [Validators.required, Validators.email]],
       });
