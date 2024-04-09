@@ -85,6 +85,35 @@ ul {
   color: #ffffff; /* Set your desired text color */
 }
 .buttons{
-margin-top: 25px;
+margin-top: 0px;
 display:inline-block;
+margin-bottom: 15px;
 }
+label {
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+select {
+  border: none; 
+  border-bottom: 1px solid black; 
+  padding: 5px;
+  width: 100%;
+  background-color: transparent; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  appearance: none; 
+  color: #636363;
+  font-size: 15px;
+
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  margin-left: 10px; /* Add margin between buttons */
+}
+

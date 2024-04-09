@@ -18064,6 +18064,39 @@ html:not(.layout-footer-fixed) .content-wrapper {
 
 }
 
+.balanceBackground{
+
+  background-color: white;
+  border-radius: 150px 150px 0 0;
+    border: 2px solid blue;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.balance{
+  margin-left: 10px;
+  border-radius: 10px;
+  width: 100px;
+  height: auto;
+  background-color: white;
+  padding: 10px;
+}
+
+.total{
+  font-size: small ;color: black; float: inline-end;
+  background-color: #9570F1;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  border-radius: 3px;
+}
+
+.container2{
+  background-color: white; border-radius: 10px;text-align: center; border-bottom: 10px solid black; height: auto; padding: 5px; margin-top: 10px;
+}
+
 /*Creating a slide*/
 .slider {
   overflow: hidden;

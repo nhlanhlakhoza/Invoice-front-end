@@ -161,7 +161,7 @@
                               </div>
                             </div>
                             <br>
-                            <button type="submit"  [disabled]="!formData.get('client')?.valid" class="button buttonBlue" >Continue
+                            <button type="submit"   class="button buttonBlue" >Continue
                               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                             </button>
                           </form>
@@ -216,7 +216,7 @@
                               </div>
                             </div>
                             <br>
-                            <button type="submit"  [disabled]="!formData.get('clientAddress')?.valid" class="button buttonBlue" >Continue
+                            <button type="submit"   class="button buttonBlue" >Continue
                               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                             </button>
                           </form>
@@ -256,17 +256,18 @@
                                   <div *ngIf="items.controls[i].get('qty')?.errors?.['required']" class="alert alert-danger">Quantity is required.</div>
                                   <div *ngIf="items.controls[i].get('qty')?.errors?.['pattern']" class="alert alert-danger">A valid Quantity is required.</div>
                                 </div>
-                                <br>
-                                <br>
-                                <button type="button" (click)="removeItem(i)" class="buttons buttonBlues" style="margin-top: -30px;">Remove Item</button>
-                              </div>
+                                
+                                <div class="button-container">
+                                  <button type="button" (click)="removeItem(i)" style="left: -10px"class="buttons buttonBlues">Remove Item</button>
+                                  <button type="button" (click)="addItem()" class="buttons buttonBlues">Add Item</button>
+                                </div>                             
+                               </div>
                             </div>
-                            <br>
-                            <button type="button" (click)="addItem()" class="buttons buttonBlues"style="margin-top: -125px; margin-left:150px ;">Add Item</button>
+                            
                           
-                            <div>
+                        <div>
                               
-                              <label>Type:</label>
+                           <label>Type:</label>
                             <select style="margin-bottom: 25px;" formControlName="type" required>
                               <option value="">Select Type</option>
                              <option value="Invoice">Invoice</option>

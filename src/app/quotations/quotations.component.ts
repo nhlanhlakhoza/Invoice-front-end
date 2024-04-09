@@ -44,7 +44,7 @@ export class QuotationsComponent implements OnInit {
   }
 
   fetchAllQuotes(): void {
-    this.http.get<Quote[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
+    this.http.get<Quote[]>('http://localhost:8080/user/displayAllQuote?email=' + this.email)
       .subscribe(
         quotes => {
           // Sort quotes array in descending order by date
@@ -75,7 +75,7 @@ export class QuotationsComponent implements OnInit {
     const endAmount = parseFloat(amountRangeParts[1]);
   
     // Fetch quotes
-    this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
+    this.http.get<any[]>('http://localhost:8080/user/displayAllQuote?email=' + this.email)
       .subscribe(
         quotes => {
           // Filter quotes based on date range and amount range
@@ -102,7 +102,7 @@ export class QuotationsComponent implements OnInit {
   }
 
   getQuoteDetails(quoteNo: number): void {
-    const apiUrl = `http://localhost:8081/user/quote/${quoteNo}`;
+    const apiUrl = `http://localhost:8080/user/quote/${quoteNo}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Quote details:', response);
@@ -175,7 +175,7 @@ export class QuotationsComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8081/user/quotes/${quoteNo}/update?email=${email}`;
+      const backendUrl = `http://localhost:8080/user/quotes/${quoteNo}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Quotation updated successfully', response);

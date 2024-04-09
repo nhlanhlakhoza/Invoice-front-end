@@ -57,19 +57,19 @@ export class Invoices4Component implements OnInit {
     this.submittingForm = true;
   
     forkJoin([
-      this.http.get<any[]>(`http://localhost:8081/user/${this.email}/payment-status/unpaid`).pipe(
+      this.http.get<any[]>(`http://localhost:8080/user/${this.email}/payment-status/unpaid`).pipe(
         catchError(error => {
           console.error('Error fetching invoices:', error);
           return of([]); // Return an empty array if there's an error
         })
       ),
-      this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email).pipe(
+      this.http.get<any[]>('http://localhost:8080/user/displayAllQuote?email=' + this.email).pipe(
         catchError(error => {
           console.error('Error fetching quotes:', error);
           return of([]); // Return an empty array if there's an error
         })
       ),
-      this.http.get<any[]>(`http://localhost:8081/user/${this.email}/payment-status/paid`).pipe(
+      this.http.get<any[]>(`http://localhost:8080/user/${this.email}/payment-status/paid`).pipe(
         catchError(error => {
           console.error('Error fetching paid invoices:', error);
           return of([]); // Return an empty array if there's an error

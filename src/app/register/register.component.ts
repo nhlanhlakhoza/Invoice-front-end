@@ -118,7 +118,7 @@ export class RegisterComponent {
         }
       };
   
-      this.http.post('http://localhost:8081/register', formData).subscribe(
+      this.http.post('http://localhost:8080/register', formData).subscribe(
         () => {
           this.showAlertMessage('success', 'Registered successfully');
   

@@ -23,8 +23,9 @@
 }
 .filter-btn{
   background-color: #9570F1;
-  margin-top: -30px;
-  width: 100%; /* Set the width as desired */
+  width: 100%;
+  border: 1px solid #9570F1;
+  
 }
 .spinner-container {
   position: absolute;
@@ -49,6 +50,7 @@ height: 3rem; /* Adjust the height */
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
 }
 
 .form-select:focus {
@@ -85,3 +87,17 @@ height: 3rem; /* Adjust the height */
 .custom-form-field mat-datepicker-content {
   background-color: #f5f5f5; /* Set the background color of the date picker */
 }
+.date-input-container {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+ mat-datepicker-toggle {
+  position: absolute;
+  top: 35%;
+  right: 8px; /* Adjust as needed */
+  transform: translateY(-50%);
+  left: 87%;
+}
+

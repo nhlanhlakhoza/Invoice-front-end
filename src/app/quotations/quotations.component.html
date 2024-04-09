@@ -163,17 +163,17 @@
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div class="">
         <div class="">
-          <mat-form-field class="custom-form-field">
+          <div class="date-input-container">
             <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #startDatePicker></mat-datepicker>
-          </mat-form-field>
-          
-          <mat-form-field class="custom-form-field">
+          </div>
+        
+          <div class="date-input-container">
             <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
             <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #endDatePicker></mat-datepicker>
-          </mat-form-field>
+          </div>
           
           
           <select class="form-select" [(ngModel)]="amountRange">
@@ -192,7 +192,7 @@
           </select>
 <br>
 <br>
-    <div style="margin-left: 10px; margin-bottom: -50x;">
+    <div style="margin-bottom: -50x; width: 100%;">
             <button class="btn btn-secondary filter-btn" (click)="applyFilter()">Apply Filter</button>
     </div> 
         </div>

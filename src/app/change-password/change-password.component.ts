@@ -56,7 +56,7 @@ export class ChangePasswordComponent {
       password: password
     };
 
-    this.http.post<any>('http://localhost:8081/user/resetPassword', data).subscribe(
+    this.http.post<any>('http://localhost:8080/user/resetPassword', data).subscribe(
       (response) => {
         console.log('Password reset successfully!', response);
         this.showAlertMessage('success', 'Reset password request sent successfully!');

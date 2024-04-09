@@ -120,7 +120,7 @@
                           <div class="">
                             <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
                               
-                          <label>Full Name</label>
+                          <label>Fullname</label>
   
                           <input type="text" formControlName="fullName" style="margin-bottom: 25px;" >
                           <div
@@ -129,7 +129,7 @@
                           <span *ngIf="change['fullName'].errors?.['required']">Full name is required</span>
                            </div>
   
-                          <label>User Name</label>
+                          <label>Username</label>
   
                           <input type="text" formControlName="username" style="margin-bottom: 25px;" >
 
