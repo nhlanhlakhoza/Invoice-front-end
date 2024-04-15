@@ -8,15 +8,13 @@
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
 
     <!-- Favicon -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
@@ -97,7 +95,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               
               <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="col">
                   <div class="card h-100">
 
                     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form1'">
@@ -132,9 +130,10 @@
               <div class="row">
 
                <!-- Notifications -->
-  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form2'">
+  <div class="col">
     <div class="card h-100">
-     
+      <div class="card-body custom-card-body" style="border-bottom: 2px;" *ngIf="currentForm === 'form2'">
+
       <div style="margin-bottom: 25px; margin-top: 25px;">
         <h2 style="margin-left: 10px;"> Notifications</h2>
         <ol *ngIf="notifications.length > 0; else noNotifications">
@@ -149,8 +148,10 @@
         </ol>
         
       </div>
+   
       <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: 10px;"
               (click)="toggleForms('form1')">Back</button>
+            </div>
     </div>
   </div>
   <ng-template #noNotifications>
@@ -169,127 +170,183 @@
 
 <!-- Notifications Viewed -->
 <!-- Notifications Viewed -->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
+<div  *ngIf="currentForm === 'form5'">
   <ng-container *ngIf="transformedMessage.startsWith('Invoice number')">
     <div class="card h-100">
       <div style="margin-bottom: 25px; margin-top: 25px;margin-left: 10px;">
         
         <!-- Displaying Invoice Details -->
-        <h2>Invoice Details</h2>
+        <h3><strong>INVOICE DETAILS</strong></h3>
+        <hr style="margin-top: -10px;">
+
+
+
         <div *ngIf="invoiceDetails">
           <p><strong>Invoice Number:</strong> {{ invoiceDetails.invoiceNo }}</p>
           <p><strong>Date:</strong> {{ invoiceDetails.date }}</p>
-          <p><strong>Payment Status:</strong> {{ invoiceDetails.paymentStatus }}</p>
-          <h3><strong>Client Details</strong></h3>
+          <p><strong>Payment Status:</strong> 
+            <span [ngClass]="{ 'not-paid': invoiceDetails.paymentStatus === 'not-paid', 'paid': invoiceDetails.paymentStatus === 'paid', 'draft': invoiceDetails.paymentStatus === 'draft' }">
+                {{ invoiceDetails.paymentStatus }}
+            </span>
+        </p>
+        
+                  
+
+        
+          <h3><strong>CLIENT DETAILS</strong></h3>
+          <hr style="margin-top: -10px;">
           <p><strong>Name:</strong> {{ invoiceDetails.client.f_name }} {{ invoiceDetails.client.l_name }}</p>
           <p><strong>Email:</strong> {{ invoiceDetails.client.email }}</p>
           <p><strong>Phone Number:</strong> {{ invoiceDetails.client.phoneNo }}</p>
         
-          <h3><strong>Client Address</strong></h3>
+          <h3><strong>CLIENT ADDRESS</strong></h3>
+          <hr style="margin-top: -10px;">
           <p><strong>Street:</strong> {{invoiceDetails.clientAddress.streetNo }} {{invoiceDetails.clientAddress.streetName }}</p>
           <p><strong>Town:</strong> {{ invoiceDetails.clientAddress.town }}</p>
           <p><strong>City:</strong> {{invoiceDetails.clientAddress.city }}</p>
           <p><strong>Postal Code:</strong> {{ invoiceDetails.clientAddress.postalCode }}</p>
-          <h3><strong>Items</strong></h3>
+        
+          <h4><strong>ITEMS</strong></h4>
           <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Price</th>
-              </tr>
-            </thead>
             <tbody>
-              <tr *ngFor="let item of invoiceDetails.items">
-                <td>{{ item.desc }}</td>
-                <td>{{ item.qty }}</td>
-                <td>R{{ item.price }}</td>
-              </tr>
+              <ng-container *ngFor="let item of invoiceDetails.items">
+                
+                <tr>
+                  <td class="header-cell">
+                    <p><strong>Description:</strong></p>
+                  </td>
+                  <td class="data-cell">
+                    <p>{{ item.desc }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="header-cell">
+                    <p><strong>Quantity:</strong></p>
+                  </td>
+                  <td class="data-cell">
+                    <p>{{ item.qty }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="header-cell">
+                    <p><strong>Price:</strong></p>
+                  </td>
+                  <td class="data-cell">
+                    <p>R {{ item.price }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="header-cell">
+                    <p><strong>Amount:</strong></p>
+                  </td>
+                  <td class="data-cell">
+                    <p>R{{ invoiceDetails.totalAmount }}</p>
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2"><strong>Total Amount</strong></td>
-                <td>R{{ invoiceDetails.totalAmount }}</td>
-              </tr>
-            </tfoot>
           </table>
+           
+
+          <button class="filter" (click)="toggleForms('form1')" style="margin-top: 10px;">Back</button>
         </div>
-      </div>
+       
+       </div>
     </div>
   </ng-container>
+</div>
 
-  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
+<div  *ngIf="currentForm === 'form5'">
 
-    <ng-container *ngIf="transformedMessage.startsWith('Quote number')">
-      <div class="card h-100">
-        <div style="margin-bottom: 25px; margin-top: 25px;margin-left: 10px;">
-      <!-- Displaying Quote Details -->
-      <h2>Quotation Details</h2>
+      <div class="card-body custom-card-body" style="border-bottom: 2px;" >
+        <ng-container *ngIf="transformedMessage.startsWith('Quote number')">
+            <div style="margin-bottom: 0; margin-top: 0px;margin-left: 10px;">
+          <!-- Displaying Quote Details -->
+          <h3><strong>QUOTATION DETAILS</strong></h3>
+          <hr style="margin-top: -10px;">
+
+
+
+          <div *ngIf="quoteDetails">
+            <p><strong>Quote Number:</strong> {{ quoteDetails.quoteNo }}</p>
+            <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
+          
+            <h3><strong>CLIENT DETAILS</strong></h3>
+            <hr style="margin-top: -10px;">
+            <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{ quoteDetails.client.l_name }}</p>
+            <p><strong>Email:</strong> {{ quoteDetails.client.email }}</p>
+            <p><strong>Phone Number:</strong> {{ quoteDetails.client.phoneNo }}</p>
+          
+            <h3><strong>CLIENT ADDRESS</strong></h3>
+            <hr style="margin-top: -10px;">
+            <p><strong>Street:</strong> {{ quoteDetails.clientAddress.streetNo }} {{ quoteDetails.clientAddress.streetName }}</p>
+            <p><strong>Town:</strong> {{ quoteDetails.clientAddress.town }}</p>
+            <p><strong>City:</strong> {{ quoteDetails.clientAddress.city }}</p>
+            <p><strong>Postal Code:</strong> {{ quoteDetails.clientAddress.postalCode }}</p>
+          
+            <h4><strong>ITEMS</strong></h4>
+            <table class="table table-bordered">
+              <tbody>
+                <ng-container *ngFor="let item of quoteDetails.items">
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Description:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>{{ item.desc }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Quantity:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>{{ item.qty }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Price:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>R {{ item.price }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Amount:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>R {{ quoteDetails.totalAmount }}</p>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+             
+ 
+            <button class="btn btn-secondary" style=" margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form6')">Edit Quote</button>
+          </div>
+            </div>
+        </ng-container>
     
-      <div *ngIf="quoteDetails">
-        <p><strong>Quote Number:</strong> {{ quoteDetails.quoteNo }}</p>
-        <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
-      
-        <h3><strong>Client Details</strong></h3>
-        <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{ quoteDetails.client.l_name }}</p>
-        <p><strong>Email:</strong> {{ quoteDetails.client.email }}</p>
-        <p><strong>Phone Number:</strong> {{ quoteDetails.client.phoneNo }}</p>
-      
-        <h3><strong>Client Address</strong></h3>
-        <p><strong>Street:</strong> {{ quoteDetails.clientAddress.streetNo }} {{ quoteDetails.clientAddress.streetName }}</p>
-        <p><strong>Town:</strong> {{ quoteDetails.clientAddress.town }}</p>
-        <p><strong>City:</strong> {{ quoteDetails.clientAddress.city }}</p>
-        <p><strong>Postal Code:</strong> {{ quoteDetails.clientAddress.postalCode }}</p>
-      
-        <h3><strong>Items</strong></h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of quoteDetails.items">
-              <td>{{ item.desc }}</td>
-              <td>{{ item.qty }}</td>
-              <td>R{{ item.price }}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2"><strong>Total Amount</strong></td>
-              <td>R{{ quoteDetails.totalAmount }}</td>
-            </tr>
-          </tfoot>
-        </table>
-      
-        <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form6')">Edit Quote</button>
-
-
-      </div> 
+       
+   
     </div>
-  </div>
-    </ng-container>
-  </div>
+  
+  <!-- End Of Notification Quotes-->
+
 </div>
 
 <!-- End of Notification Viewed -->
 
 
                 
-                <!--Notifications-->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
-
-
-                  </div>
-                </div>
+               
                 <!--End of Notifications-->
                 <div *ngIf="currentForm === 'form6'">
 
-                  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                  <div class="col">
                     <div class="card h-100">
   
                         <div class="">
@@ -348,7 +405,7 @@
               <!-- the end o form-->
               <div *ngIf="currentForm === 'form7'">
 
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="col">
                   <div class="card h-100">
 
                       <div class="">
@@ -404,7 +461,7 @@
               </div>
               <!-- the end o form-->
               <div *ngIf="currentForm === 'form8'">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="col">
                   <div class="card h-100">
 
                       <div class="">

@@ -129,7 +129,7 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y" [ngClass]="{'fade-out': submittingForm}">
   <div class="row">
-    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form1'">
+    <div class="col" *ngIf="currentForm === 'form1'">
       <div class="card h-100">
         <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
           <div *ngIf="submittingForm; else dataContent">
@@ -190,15 +190,15 @@
           
 
                 <!--PAID-->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form2'">
+                <div class="col" *ngIf="currentForm === 'form2'">
                   <div class="card h-100">
                     <div class="card-body" >
                       <div *ngIf="paidInvoices.length > 0; else noInvoices">
                         <div>
                           <div *ngFor="let invoice of paidInvoices">
                             <span style="text-align: left; cursor: pointer;" (click)="getInvoiceDetails(invoice.invoiceNo)">{{ '#' + invoice.invoiceNo }} . {{ invoice.date }}</span>
-                            <span style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span><br>
-                            <label>{{invoice.companyName}}</label>
+                            <span style="text-align: right; float: right;" [ngClass]="{'paid': true}">Paid</span>
+                            <label style="margin-bottom: -20px;">{{invoice.companyName}}</label>
                             <span style="text-align: right; float: right;">R {{ invoice.totalAmount }}</span><br>
                             <hr>
                           </div>
@@ -214,7 +214,7 @@
                 
                 <!--END OF-->
 <!--Unpaid-->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form3'">
+<div class="col" *ngIf="currentForm === 'form3'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div *ngIf="invoices.length > 0"></div>
@@ -226,7 +226,7 @@
             {{ '#' + invoice.invoiceNo }} . {{ invoice.date }}
           </span>
           <span style="text-align: left; float: inline-end;" class="not-paid"> Unpaid</span><br>
-          <label>{{invoice.companyName}}</label>
+          <label style="margin-bottom: -20px;">{{invoice.companyName}}</label>
           <span style="text-align: right; float: inline-end;"> R {{invoice.totalAmount}}</span><br>
           <hr>
         
@@ -244,7 +244,7 @@
 
 
                <!-- Filtering -->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
+<div class="col" *ngIf="currentForm === 'form4'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div class="">
@@ -297,104 +297,161 @@
 <!-- End of Filtering -->
 
 <!-- Displaying details -->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form5'">
+<div class="col" *ngIf="currentForm === 'form5'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div class="">
         <div class="">
       <!-- Displaying Invoice Details -->
-      <h2>Invoice Details</h2>
+      <h3><strong>INVOICE DETAILS</strong></h3>
+      <hr style="margin-top: -10px;">
+
+
+
       <div *ngIf="invoiceDetails">
         <p><strong>Invoice Number:</strong> {{ invoiceDetails.invoiceNo }}</p>
         <p><strong>Date:</strong> {{ invoiceDetails.date }}</p>
-        <h3><strong>Client Details</strong></h3>
+        <p><strong>Payment Status:</strong> {{ invoiceDetails.paymentStatus }}</p>
+
+      
+        <h3><strong>CLIENT DETAILS</strong></h3>
+        <hr style="margin-top: -10px;">
         <p><strong>Name:</strong> {{ invoiceDetails.client.f_name }} {{ invoiceDetails.client.l_name }}</p>
         <p><strong>Email:</strong> {{ invoiceDetails.client.email }}</p>
         <p><strong>Phone Number:</strong> {{ invoiceDetails.client.phoneNo }}</p>
       
-        <h3><strong>Client Address</strong></h3>
+        <h3><strong>CLIENT ADDRESS</strong></h3>
+        <hr style="margin-top: -10px;">
         <p><strong>Street:</strong> {{invoiceDetails.clientAddress.streetNo }} {{invoiceDetails.clientAddress.streetName }}</p>
         <p><strong>Town:</strong> {{ invoiceDetails.clientAddress.town }}</p>
         <p><strong>City:</strong> {{invoiceDetails.clientAddress.city }}</p>
         <p><strong>Postal Code:</strong> {{ invoiceDetails.clientAddress.postalCode }}</p>
-        <h3>Items</h3>
+      
+        <h4><strong>ITEMS</strong></h4>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
           <tbody>
-            <tr *ngFor="let item of invoiceDetails.items">
-              <td>{{ item.desc }}</td>
-              <td>{{ item.qty }}</td>
-              <td>R{{ item.price }}</td>
-            </tr>
+            <ng-container *ngFor="let item of invoiceDetails.items">
+              
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Description:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>{{ item.desc }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Quantity:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>{{ item.qty }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Price:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>R {{ item.price }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Amount:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>R{{ invoiceDetails.totalAmount }}</p>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2"><strong>Total Amount</strong></td>
-              <td>R{{ invoiceDetails.totalAmount }}</td>
-            </tr>
-          </tfoot>
         </table>
+         
+
+        <button class="filter" style=" margin-bottom: -10px; margin-top: 10px;" (click)="toggleForms('form1')">Back</button>
       </div>
-    </div>
+     
+     </div>
+ 
   </div>
 </div>
 </div>
-              </div>
+</div>
                   <!-- End Displaying Invoice Details -->
                   <!-- Displaying details -->
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form6'">
+<div class="col" *ngIf="currentForm === 'form6'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div class="">
         <div class="">
       <!-- Displaying Invoice Details -->
-      <h2>Quotation Details</h2>
-      <div *ngIf="quoteDetails">
-        <p><strong>Invoice Number:</strong> {{quoteDetails.quoteNo }}</p>
-        <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
-        <h3><strong>Client Details</strong></h3>
-        <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{quoteDetails.client.l_name }}</p>
-        <p><strong>Email:</strong> {{quoteDetails.client.email }}</p>
-        <p><strong>Phone Number:</strong> {{quoteDetails.client.phoneNo }}</p>
-      
-        <h3><strong>Client Address</strong></h3>
-        <p><strong>Street:</strong> {{quoteDetails.clientAddress.streetNo }} {{quoteDetails.clientAddress.streetName }}</p>
-        <p><strong>Town:</strong> {{quoteDetails.clientAddress.town }}</p>
-        <p><strong>City:</strong> {{quoteDetails.clientAddress.city }}</p>
-        <p><strong>Postal Code:</strong> {{quoteDetails.clientAddress.postalCode }}</p>
-        <h3>Items</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of quoteDetails.items">
-              <td>{{ item.desc }}</td>
-              <td>{{ item.qty }}</td>
-              <td>R{{ item.price }}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2"><strong>Total Amount</strong></td>
-              <td>R{{quoteDetails.totalAmount }}</td>
-            </tr>
-          </tfoot>
-        </table>
-        <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form7')">Edit Quote</button>
+      <h3><strong>QUOTATION DETAILS</strong></h3>
+          <hr style="margin-top: -10px;">
 
-      </div>
-    </div>
+
+
+          <div *ngIf="quoteDetails">
+            <p><strong>Quote Number:</strong> {{ quoteDetails.quoteNo }}</p>
+            <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
+          
+            <h3><strong>CLIENT DETAILS</strong></h3>
+            <hr style="margin-top: -10px;">
+            <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{ quoteDetails.client.l_name }}</p>
+            <p><strong>Email:</strong> {{ quoteDetails.client.email }}</p>
+            <p><strong>Phone Number:</strong> {{ quoteDetails.client.phoneNo }}</p>
+          
+            <h3><strong>CLIENT ADDRESS</strong></h3>
+            <hr style="margin-top: -10px;">
+            <p><strong>Street:</strong> {{ quoteDetails.clientAddress.streetNo }} {{ quoteDetails.clientAddress.streetName }}</p>
+            <p><strong>Town:</strong> {{ quoteDetails.clientAddress.town }}</p>
+            <p><strong>City:</strong> {{ quoteDetails.clientAddress.city }}</p>
+            <p><strong>Postal Code:</strong> {{ quoteDetails.clientAddress.postalCode }}</p>
+          
+            <h4><strong>ITEMS</strong></h4>
+            <table class="table table-bordered">
+              <tbody>
+                <ng-container *ngFor="let item of quoteDetails.items">
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Description:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>{{ item.desc }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Quantity:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>{{ item.qty }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Price:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>R {{ item.price }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="header-cell">
+                      <p><strong>Amount:</strong></p>
+                    </td>
+                    <td class="data-cell">
+                      <p>R {{ quoteDetails.totalAmount }}</p>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+             
+ 
+            <button class="btn btn-secondary" style=" margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form6')">Edit Quote</button>
+          </div>
+        </div>
   </div>
 </div>
               </div>
@@ -407,7 +464,7 @@
                <!--the forms-->
           <div *ngIf="currentForm === 'form7'">
 
-            <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+            <div class="col">
               <div class="card h-100">
 
                   <div class="">
@@ -466,7 +523,7 @@
         <!-- the end o form-->
         <div *ngIf="currentForm === 'form8'">
 
-          <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+          <div class="col">
             <div class="card h-100">
 
                 <div class="">
@@ -522,7 +579,7 @@
         </div>
         <!-- the end o form-->
         <div *ngIf="currentForm === 'form9'">
-          <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+          <div class="col">
             <div class="card h-100">
 
                 <div class="">
@@ -591,8 +648,7 @@
             </div>
 
               <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
+<div class="col">                  <div class="card h-100">
                   </div>
                 </div>
  

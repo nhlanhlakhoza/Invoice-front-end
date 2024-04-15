@@ -88,37 +88,26 @@
             </div>
           </nav>
           
-
-          <nav
-          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-          id="layout-navbar">
-       
-
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-           
-
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-           <li style="margin-left: 10px;">
-            <a  (click)="toggleForms('form1')">All </a>
-           </li>
-  
-           <li style="margin-left: 25px;">
-            <input type="text" placeholder="Search Quotations" [(ngModel)]="searchQuery" (input)="performSearch()">
-
-           </li>
-
-           
-           <li style="margin-left: 10px;">
-            <button class="filter"(click)="toggleForms('form4')">Filter</button>
-           </li>
-              
-
-             
-            </ul>
+          <div class="row">
+            <div class="col-12">
+              <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                  <ul class="navbar-nav flex-row align-items-center ms-auto">
+                    <li style="margin-left: 10px;">
+                      <a (click)="toggleForms('form1')">All</a>
+                    </li>
+                    <li style="margin-left: 25px;">
+                      <input type="text" placeholder="Search Quotations" [(ngModel)]="searchQuery" (input)="performSearch()">
+                    </li>
+                    <li style="margin-left: 10px;">
+                      <button class="filter" (click)="toggleForms('form4')">Filter</button>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
           </div>
-        </nav>
-
-          <!-- / Navbar -->
+                    <!-- / Navbar -->
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -127,8 +116,7 @@
             <div class="container-xxl flex-grow-1 container-p-y" >
               
               <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
+<div class="col">                  <div class="card h-100">
 
                     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form1'">
                       <div class="">
@@ -143,8 +131,7 @@
                           <span style=" text-align: right; float: inline-end;"> R {{quote.totalAmount}}</span><br>
 
                           <hr>
-                         
-                          <hr>
+                        
                           </div>
                         </div>
                         <div id="orderStatisticsChart"></div>
@@ -210,47 +197,71 @@
       <div class="">
         <div class="">
       <!-- Displaying Invoice Details -->
-      <h2>Quotation Details</h2>
+      <h3><strong>QUOTATION DETAILS</strong></h3>
+      <hr style="margin-top: -10px;">
+
+
+
       <div *ngIf="quoteDetails">
-        <p><strong>Invoice Number:</strong> {{quoteDetails.quoteNo }}</p>
+        <p><strong>Quote Number:</strong> {{ quoteDetails.quoteNo }}</p>
         <p><strong>Date:</strong> {{ quoteDetails.date }}</p>
-        <h3><strong>Client Details</strong></h3>
-        <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{quoteDetails.client.l_name }}</p>
-        <p><strong>Email:</strong> {{quoteDetails.client.email }}</p>
-        <p><strong>Phone Number:</strong> {{quoteDetails.client.phoneNo }}</p>
       
-        <h3><strong>Client Address</strong></h3>
-        <p><strong>Street:</strong> {{quoteDetails.clientAddress.streetNo }} {{quoteDetails.clientAddress.streetName }}</p>
-        <p><strong>Town:</strong> {{quoteDetails.clientAddress.town }}</p>
-        <p><strong>City:</strong> {{quoteDetails.clientAddress.city }}</p>
-        <p><strong>Postal Code:</strong> {{quoteDetails.clientAddress.postalCode }}</p>
-        <h3>Items</h3>
+        <h3><strong>CLIENT DETAILS</strong></h3>
+        <hr style="margin-top: -10px;">
+        <p><strong>Name:</strong> {{ quoteDetails.client.f_name }} {{ quoteDetails.client.l_name }}</p>
+        <p><strong>Email:</strong> {{ quoteDetails.client.email }}</p>
+        <p><strong>Phone Number:</strong> {{ quoteDetails.client.phoneNo }}</p>
+      
+        <h3><strong>CLIENT ADDRESS</strong></h3>
+        <hr style="margin-top: -10px;">
+        <p><strong>Street:</strong> {{ quoteDetails.clientAddress.streetNo }} {{ quoteDetails.clientAddress.streetName }}</p>
+        <p><strong>Town:</strong> {{ quoteDetails.clientAddress.town }}</p>
+        <p><strong>City:</strong> {{ quoteDetails.clientAddress.city }}</p>
+        <p><strong>Postal Code:</strong> {{ quoteDetails.clientAddress.postalCode }}</p>
+      
+        <h4><strong>ITEMS</strong></h4>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
           <tbody>
-            <tr *ngFor="let item of quoteDetails.items">
-              <td>{{ item.desc }}</td>
-              <td>{{ item.qty }}</td>
-              <td>R{{ item.price }}</td>
-            </tr>
+            <ng-container *ngFor="let item of quoteDetails.items">
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Description:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>{{ item.desc }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Quantity:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>{{ item.qty }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Price:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>R {{ item.price }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="header-cell">
+                  <p><strong>Amount:</strong></p>
+                </td>
+                <td class="data-cell">
+                  <p>R {{ quoteDetails.totalAmount }}</p>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2"><strong>Total Amount</strong></td>
-              <td>R{{quoteDetails.totalAmount }}</td>
-            </tr>
-          </tfoot>
         </table>
-        
-        <button class="btn btn-secondary custom-btn" (click)="toggleForms('form6')">Edit Quote</button>
+         
 
-
+        <button class="btn btn-secondary" style=" margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form6')">Edit Quote</button>
+   
       </div>
     </div>
   </div>
@@ -448,8 +459,7 @@
             </div>
 
               <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
+<div class="col">                  <div class="card h-100">
                   </div>
                 </div>
  

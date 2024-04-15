@@ -93,6 +93,8 @@
             </ul>
           </div>
         </nav>
+        <div class="row">
+          <div class="col">
         <div *ngIf="profileImage">
           <img [src]="profileImage" class="imageCentering" width="178px" height="178px">
         </div>
@@ -105,6 +107,8 @@
           height="30px" 
           class="add-image" 
           (click)="confirmAction()">
+        </div>
+        </div>
         
           
             <div class="content-wrapper">
@@ -113,8 +117,9 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 
                 <div class="row">
-                  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                    <div class="card h-100">
+
+                  <div class="col">      
+                <div class="card h-100">
   
                         <div class="">
                           <div class="">
@@ -225,17 +230,10 @@
   
               </div>
   
-                <div class="row">
-                  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                    <div class="card h-100">
-                    </div>
-                  </div>
-   
-                </div>
+               
             
               </div>
-              <br/>
-              <br/>
+             
               <!-- / Content -->
               <div class="content-backdrop fade"></div>
             </div>

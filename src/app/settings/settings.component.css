@@ -28,4 +28,57 @@
 .spinner-border {
   width: 3rem; /* Adjust the width */
   height: 3rem; /* Adjust the height */
-}  
+} 
+.header-cell {
+  border-right: 1px solid #dee2e6; /* Add right border to header cell */
+}
+
+.spacer-cell {
+  border-left: 1px solid #dee2e6; /* Add left border to spacer cell */
+}
+.header-cell {
+  border-right: 1px solid #dee2e6; /* Add right border to header cell */
+}
+
+.data-cell {
+  padding-left: 10px; /* Add some padding to data cell */
+}
+.not-paid{
+  color:#DB2419;
+  background-color: hsla(3, 80%, 48%, 0.4);
+  border-radius: 50px;
+  font-size: 10.5px;
+  padding: 1.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: 500;
+
+}
+
+.paid{
+  color:#6ACC74;
+  background-color:#6ACC7466;
+  border-radius: 50px;
+  font-size: 10.5px;
+  padding: 1.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: 500;
+  margin-top: 5px;
+
+}
+
+.draft{
+  color: #E1BF45;
+  background-color: #E1BF4566;
+  border-radius: 50px;
+  font-size: 10.5px;
+  padding: 1.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: 500;
+
+
+}
+
+
