@@ -22,6 +22,7 @@ export class ForgotComponent {
   }
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
+  
   submittingForm: boolean = false;
   sendData() {
     if (this.forgotForms.valid) {

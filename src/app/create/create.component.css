@@ -63,16 +63,7 @@ ul {
     position: relative;
   }
   
-  .spinner-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-.spinner-border {
-  width: 3rem; /* Adjust the width */
-  height: 3rem; /* Adjust the height */
-}  
+ 
 
 .rounded-background {
   width: 20px;
@@ -115,5 +106,17 @@ select {
 
 .buttons {
   margin-left: 10px; /* Add margin between buttons */
+}
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-border {
+  width: 1.5rem; /* Adjust size as needed */
+  height: 1.5rem; /* Adjust size as needed */
+  color: white !important; /* Change color as desired */
 }
 

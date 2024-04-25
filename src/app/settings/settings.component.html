@@ -1,48 +1,6 @@
-<!DOCTYPE html>
-
-<html
-  lang="en"
-  class="light-style layout-menu-fixed layout-compact"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="" />
-
-    <!-- Favicon -->
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet" />
-
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="/assets/js/config.js"></script>
-  </head>
+<link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+<link rel="stylesheet" href="/assets/css/demo.css" />
 
   <body>
     <!-- Layout wrapper -->
@@ -123,19 +81,16 @@
 
               <div class="scroll-container">
 
-              
-
             </div>
 
               <div class="row">
-
                <!-- Notifications -->
-  <div class="col">
+  <div class="col" style="width:100%">
     <div class="card h-100">
       <div class="card-body custom-card-body" style="border-bottom: 2px;" *ngIf="currentForm === 'form2'">
 
       <div style="margin-bottom: 25px; margin-top: 25px;">
-        <h2 style="margin-left: 10px;"> Notifications</h2>
+        <h2> Notifications</h2>
         <ol *ngIf="notifications.length > 0; else noNotifications">
           <li *ngFor="let notification of notifications" 
               style="margin-top: 8px;" 
@@ -149,9 +104,10 @@
         
       </div>
    
-      <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: 10px;"
+      <button class="filter" style="margin-bottom: 10px;"
               (click)="toggleForms('form1')">Back</button>
             </div>
+          
     </div>
   </div>
   <ng-template #noNotifications>
@@ -173,7 +129,7 @@
 <div  *ngIf="currentForm === 'form5'">
   <ng-container *ngIf="transformedMessage.startsWith('Invoice number')">
     <div class="card h-100">
-      <div style="margin-bottom: 25px; margin-top: 25px;margin-left: 10px;">
+      <div style="margin-bottom: 25px; margin-top: 25px;padding: 15px;">
         
         <!-- Displaying Invoice Details -->
         <h3><strong>INVOICE DETAILS</strong></h3>
@@ -246,21 +202,27 @@
               </ng-container>
             </tbody>
           </table>
-           
-
-          <button class="filter" (click)="toggleForms('form1')" style="margin-top: 10px;">Back</button>
+        
+            <button class="filter" style="margin-top: 10px;"
+                    (click)="toggleForms('form1')">Back</button>
         </div>
+        
+        
        
        </div>
+       
     </div>
   </ng-container>
+  
 </div>
+
 
 <div  *ngIf="currentForm === 'form5'">
 
+  <div class="card h-100">
       <div class="card-body custom-card-body" style="border-bottom: 2px;" >
         <ng-container *ngIf="transformedMessage.startsWith('Quote number')">
-            <div style="margin-bottom: 0; margin-top: 0px;margin-left: 10px;">
+            <div>
           <!-- Displaying Quote Details -->
           <h3><strong>QUOTATION DETAILS</strong></h3>
           <hr style="margin-top: -10px;">
@@ -325,10 +287,11 @@
             </table>
              
  
-            <button class="btn btn-secondary" style=" margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;" (click)="toggleForms('form6')">Edit Quote</button>
+            <button class="btn btn-secondary" style=" margin-bottom: -10px; margin-top: 10px; background-color: #9570F1;border: 0px;" (click)="toggleForms('form6')">Edit Quote</button>
           </div>
             </div>
         </ng-container>
+      </div>
     
        
    
@@ -346,7 +309,6 @@
                 <!--End of Notifications-->
                 <div *ngIf="currentForm === 'form6'">
 
-                  <div class="col">
                     <div class="card h-100">
   
                         <div class="">
@@ -396,7 +358,6 @@
                         </div>
                         
                       
-                    </div>
                   </div>
 
 
@@ -405,7 +366,6 @@
               <!-- the end o form-->
               <div *ngIf="currentForm === 'form7'">
 
-                <div class="col">
                   <div class="card h-100">
 
                       <div class="">
@@ -457,11 +417,9 @@
                       
                     
                   </div>
-                </div>
               </div>
               <!-- the end o form-->
               <div *ngIf="currentForm === 'form8'">
-                <div class="col">
                   <div class="card h-100">
 
                       <div class="">
@@ -502,15 +460,14 @@
                           
                             
                             
-                            <button type="submit"  [disabled]="submittingForm"[disabled]="!formData.valid" class="button buttonBlue">Update Quote
-                              <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                            </button>
-                                 <!-- Loading spinner -->
-                   <div *ngIf="submittingForm" class="spinner-container">
-                    <div class="spinner-border text-primary" role="status">
-                     <span class="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
+                            <button type="submit" [disabled]="formData.invalid || submittingForm" class="button buttonBlue" style="width: 100%; height:43px; position: relative;">
+                              <span *ngIf="!submittingForm">Update Quote</span>
+                              <div *ngIf="submittingForm" class="spinner-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                  <div class="spinner-border text-primary" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                  </div>
+                              </div>
+                          </button>
                             <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
                               {{ alertMessage }}
                             </div>
@@ -520,7 +477,6 @@
                       </div>
                       
                     
-                  </div>
                 </div>
               </div>
               </div>
@@ -537,49 +493,5 @@
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- / Layout wrapper 
-    <div class="bottom-menu">
-      <div id="orderStatisticsChart"></div>
-      <ul>
-        <li><a style="color: grey;"routerLink="/dashboard" ><img src="assets/img/Dashboard.svg" style="margin-left: 8.5px; " class="menu-icon" > <br/> Home</a></li>
-        <li><a style="color: grey;"routerLink="/invoices" ><img src="assets/img/Document.svg" style="margin-left: 13px;" class="menu-icon"> <br/> Invoices</a></li>
-        <li><a style="color: grey;"routerLink="/quotations" ><img src="assets/img/User.svg" style="margin-left: 21px;" class="menu-icon"> <br/> Quotations</a></li>
-        <li><a style="color: grey;"routerLink="/create" ><img src="assets/img/User.svg" style="margin-left: 5px;" class="menu-icon"> <br/> Add</a></li>
-
-        <li>
-          <a routerLink="/settings" style="color: grey;">
-             <img src="assets/img/cog-outline.svg" style="margin-left: 13px;" class="menu-icon" > 
-            <br/> Settings
-          </a>
-        </li>
-
-      </ul>
-    </div>-->
-   
-   
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="assets/vendor/js/menu.js"></script>
-
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
-</html>
 

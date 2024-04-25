@@ -145,8 +145,7 @@ export class ProfileComponent implements OnInit {
      
     
       } else if (result === 'upload') {
-        // Handle file upload logic here
-        // Handle file upload logic here
+        
         if (this.fileInput) {
           this.fileInput.nativeElement.click();
         }

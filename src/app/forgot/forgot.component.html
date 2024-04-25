@@ -1,43 +1,4 @@
-<!--<p class="p-content"> Invoicing</p>
-<img src="assets/img/Icon.png" class="center" width="25px" height="auto">
 
-
-<form [formGroup]="registerForm " (submit)="onRegisterUser()" >
-    <div class="group">
-        <input type="text"><span class="highlight" formControlName="fullName" ></span><span class="bar"></span>
-        <label>Full Name</label>
-      </div>
-      
-    <div class="group">
-      <input type="text"><span class="highlight" formControlName="emailAddress"></span><span class="bar"></span>
-      <label>Email Address</label>
-
-   
-    
-    </div>
-    <div class="group">
-        <input type="text"><span class="highlight" formControlName="phone_number"></span><span class="bar"></span>
-       
-        <select>
-          <option>+27</option>
-          <option>+27</option>
-          <option>+27</option>
-          <option>+27</option>
-        </select>
-        <label>Phone Number</label>
-
-       
-      </div>
-    <div class="group">
-      <input type="password"><span class="highlight" formControlName="password"></span><span class="bar"></span>
-      <label>Password</label>
-    </div>
-    <button type="submit" class="button buttonBlue">Register
-      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-    </button>
-  </form>
-
-  <a routerLink="#">Forgot Password?</a>-->
 
   
   <p class="p-content"> Invoicing</p>
@@ -127,15 +88,14 @@
                            </div>
                           
   
-                              <button type="submit"  [disabled]="forgot_password['invalid']" class="button buttonBlue">Submit
-                                  <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                                </button>
-                                             <!-- Loading spinner -->
-             <div *ngIf="submittingForm" class="spinner-container">
-              <div class="spinner-border text-primary" role="status">
-               <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
+                           <button type="submit" [disabled]="forgotForms.invalid || submittingForm" class="button buttonBlue" style="width: 100%; height:43px; position: relative;">
+                            <span *ngIf="!submittingForm">Submit</span>
+                            <div *ngIf="submittingForm" class="spinner-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </button>
                                 <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
                                   {{ alertMessage }}
                                 </div>
