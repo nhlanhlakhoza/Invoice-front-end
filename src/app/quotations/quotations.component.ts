@@ -44,7 +44,7 @@ export class QuotationsComponent implements OnInit {
   }
 
   fetchAllQuotes(): void {
-    this.http.get<Quote[]>('http://localhost:8080/user/displayAllQuote?email=' + this.email)
+    this.http.get<Quote[]>('https://ravishing-youth-production.up.railway.app/user/displayAllQuote?email=' + this.email)
       .subscribe(
         quotes => {
           // Sort quotes array in descending order by date
