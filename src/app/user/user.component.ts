@@ -102,7 +102,7 @@ export class UserComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8081/user/createInvoiceOrQuote?email=${email}`;
+      const backendUrl = `https://ravishing-youth-production.up.railway.app/user/createInvoiceOrQuote?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Form data submitted successfully:', response);

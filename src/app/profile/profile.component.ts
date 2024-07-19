@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchProfilePictureByEmail(email: string) {
-    this.http.get('http://localhost:8081/user/displayProfileImage', {
+    this.http.get('https://ravishing-youth-production.up.railway.app/user/displayProfileImage', {
       responseType: 'blob',
       params: { email: this.email },
     }).subscribe(
@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
     formData.append('email', this.profileForm.value.email);
     formData.append('phone_number', this.profileForm.value.phone_number);
     
-    this.http.post<any>('http://localhost:8081/user/updateProfile', formData).subscribe(
+    this.http.post<any>('https://ravishing-youth-production.up.railway.app/user/updateProfile', formData).subscribe(
       response => {
         console.log('Response from server:', response);
         this.showAlertMessage('success', response.message);
@@ -155,7 +155,7 @@ export class ProfileComponent implements OnInit {
   }
 
   removeProfile() {
-    const url = 'http://localhost:8081/update-image?email=' + this.email;
+    const url = 'https://ravishing-youth-production.up.railway.app/update-image?email=' + this.email;
   
     this.http.post(url, null).subscribe(
       () => {

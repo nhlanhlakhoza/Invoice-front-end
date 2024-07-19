@@ -27,7 +27,7 @@ export class EmailServiceService {
   sendEmailToBackend(data: any) {
     // Make sure you have the email stored in this.email variable
     // Send the email along with other data to the backend
-    return this.http.post('http://localhost:8081/user/createInvoiceOrQuote', data, {
+    return this.http.post('https://ravishing-youth-production.up.railway.app/user/createInvoiceOrQuote', data, {
       params: {
         email: this.email // Send the email as a parameter to the backend
       }

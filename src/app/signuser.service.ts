@@ -8,7 +8,7 @@ import { Users } from './users';
 })
 export class SignuserService {
 
-  private baseUrl= "http://localhost:8081/register";
+  private baseUrl= "https://ravishing-youth-production.up.railway.app/register";
   constructor( private httpClient: HttpClient) { }
 
 signUser(users:Users):Observable<any> {
