@@ -38,7 +38,7 @@ export class LoginComponent {
       this.loginuserservice.loginUser(this.user).subscribe(
         response => {
           // Successful login response handling
-          this.showAlertMessage('success', 'Logged in successfully');
+          
           setTimeout(() => {
             const token = response.token;
             // Store the token in local storage
