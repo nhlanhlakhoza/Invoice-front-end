@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
   balance!: number;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService, private invoiceService: InvoiceService)  { }
-
+ 
+  
   ngOnInit(): void {
      // Start automatic slider motion on component initialization
      this.startSliderMotion();
@@ -186,6 +187,15 @@ fetchTotalUnpaidInvoices() {
       }
     );
   }
+ 
+  
+  getLetterByIndex(index: number): string {
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    return letters[index % letters.length];
+  }
+  
+  
+  
   }
   
 

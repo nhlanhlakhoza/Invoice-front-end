@@ -1,10 +1,16 @@
+
+
+
 .spinner-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .spinner-border {
-  width: 3rem; /* Adjust the width */
-  height: 3rem; /* Adjust the height */
-}  
+  width: 1.5rem; /* Adjust size as needed */
+  height: 1.5rem; /* Adjust size as needed */
+}
+
+
