@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class QuoteService {
 
-  private baseUrl = 'http://localhost:8081/user/homeQuotes'; // Assuming your backend serves the API from the same host
+  private baseUrl = 'https://ravishing-youth-production.up.railway.app/user/homeQuotes'; // Assuming your backend serves the API from the same host
 
   constructor(private http: HttpClient) { }
 

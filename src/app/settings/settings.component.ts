@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
   quoteDetails: any;
   email: string = ''; // Initialize with the default email
   notifications: Notification[] = [];
-  apiUrl: string = 'http://localhost:8081/user/notifications'; // Update with your API endpoint URL
+  apiUrl: string = 'https://ravishing-youth-production.up.railway.app/user/notifications'; // Update with your API endpoint URL
 
   // Additional properties
   formData!: FormGroup;
@@ -143,7 +143,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getInvoiceDetails(): void {
-    const apiUrl = `http://localhost:8081/user/invoice/${this.invoiceNumber}`;
+    const apiUrl = `https://ravishing-youth-production.up.railway.app/user/invoice/${this.invoiceNumber}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Invoice details:', response);
@@ -157,7 +157,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getQuoteDetails(): void {
-    const apiUrl = `http://localhost:8081/user/quote/${this.quoteNumber}`;
+    const apiUrl = `https://ravishing-youth-production.up.railway.app/user/quote/${this.quoteNumber}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Quote details:', response);
@@ -234,7 +234,7 @@ export class SettingsComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8080/user/quotes/${this.quoteNumber}/update?email=${email}`;
+      const backendUrl = `https://ravishing-youth-production.up.railway.app/user/quotes/${this.quoteNumber}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Quotation updated successfully', response);

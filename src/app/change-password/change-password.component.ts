@@ -76,7 +76,7 @@ export class ChangePasswordComponent {
       token: this.token // Include token in the data sent to the backend
     };
 
-    this.http.post<any>('http://localhost:8080/user/resetPassword', data).subscribe(
+    this.http.post<any>('https://ravishing-youth-production.up.railway.app/user/resetPassword', data).subscribe(
       (response) => {
         console.log('Password reset successfully!', response);
         this.showAlertMessage('success', 'Reset password request sent successfully!');

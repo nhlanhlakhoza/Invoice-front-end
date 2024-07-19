@@ -57,19 +57,19 @@ export class Invoices4Component implements OnInit {
     this.submittingForm = true;
   
     forkJoin([
-      this.http.get<any[]>(`http://localhost:8081/user/${this.email}/payment-status/unpaid`).pipe(
+      this.http.get<any[]>(`https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/unpaid`).pipe(
         catchError(error => {
           console.error('Error fetching invoices:', error);
           return of([]); // Return an empty array if there's an error
         })
       ),
-      this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email).pipe(
+      this.http.get<any[]>('https://ravishing-youth-production.up.railway.app/user/displayAllQuote?email=' + this.email).pipe(
         catchError(error => {
           console.error('Error fetching quotes:', error);
           return of([]); // Return an empty array if there's an error
         })
       ),
-      this.http.get<any[]>(`http://localhost:8081/user/${this.email}/payment-status/paid`).pipe(
+      this.http.get<any[]>(`https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/paid`).pipe(
         catchError(error => {
           console.error('Error fetching paid invoices:', error);
           return of([]); // Return an empty array if there's an error
@@ -130,7 +130,7 @@ export class Invoices4Component implements OnInit {
     const endAmount = parseFloat(amountRangeParts[1]);
   
     const paymentStatusPaid = 'Paid'; // Set the payment status to "paid" for paid invoices
-    const urlPaid = `http://localhost:8081/user/${this.email}/payment-status/${paymentStatusPaid}`;
+    const urlPaid = `https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/${paymentStatusPaid}`;
   
     this.http.get<any[]>(urlPaid).subscribe(
       paidInvoices => {
@@ -148,12 +148,12 @@ export class Invoices4Component implements OnInit {
   
         // Fetch unpaid invoices
         const paymentStatusUnpaid = 'Unpaid'; // Set the payment status to "unpaid" for unpaid invoices
-        const urlUnpaid = `http://localhost:8081/user/${this.email}/payment-status/${paymentStatusUnpaid}`;
+        const urlUnpaid = `https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/${paymentStatusUnpaid}`;
   
         this.http.get<any[]>(urlUnpaid).subscribe(
           unpaidInvoices => {
             // Fetch quotes
-            this.http.get<any[]>('http://localhost:8081/user/displayAllQuote?email=' + this.email)
+            this.http.get<any[]>('https://ravishing-youth-production.up.railway.app/user/displayAllQuote?email=' + this.email)
               .subscribe(
                 quotes => {
                   // Combine paid, unpaid invoices, and quotes into one array
@@ -211,7 +211,7 @@ export class Invoices4Component implements OnInit {
   
 
   fetchInvoices() {
-    this.http.get<any[]>(`http://localhost:8081/user/${this.email}/payment-status/unpaid`)
+    this.http.get<any[]>(`https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/unpaid`)
       .subscribe(
         invoices => {
           invoices.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -225,7 +225,7 @@ export class Invoices4Component implements OnInit {
   }
 loadPaidInvoices() {
   const paymentStatus = 'Paid'; // Set the payment status to "paid"
-  const url = `http://localhost:8081/user/${this.email}/payment-status/${paymentStatus}`;
+  const url = `https://ravishing-youth-production.up.railway.app/user/${this.email}/payment-status/${paymentStatus}`;
 
   this.http.get<any[]>(url).subscribe(
     invoices => {
@@ -246,7 +246,7 @@ loadPaidInvoices() {
 
 
   getInvoiceDetails(invoiceNo: number): void {
-    const apiUrl = `http://localhost:8081/user/invoice/${invoiceNo}`;
+    const apiUrl = `https://ravishing-youth-production.up.railway.app/user/invoice/${invoiceNo}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Invoice details:', response);
@@ -260,7 +260,7 @@ loadPaidInvoices() {
   }
 
   getQuoteDetails(quoteNo: number): void {
-    const apiUrl = `http://localhost:8080/user/quote/${quoteNo}`;
+    const apiUrl = `https://ravishing-youth-production.up.railway.app/user/quote/${quoteNo}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Quote details:', response);
@@ -346,7 +346,7 @@ loadPaidInvoices() {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8080/user/quotes/${quoteNo}/update?email=${email}`;
+      const backendUrl = `https://ravishing-youth-production.up.railway.app/user/quotes/${quoteNo}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Invoice or Quote submitted successfully:', response);

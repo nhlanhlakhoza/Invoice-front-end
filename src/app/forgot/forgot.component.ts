@@ -31,7 +31,7 @@ export class ForgotComponent {
         email: email
       };
       this.submittingForm = true;
-      this.http.post<any>('http://localhost:8080/forgotPassword', data)
+      this.http.post<any>('https://ravishing-youth-production.up.railway.app/forgotPassword', data)
         .subscribe(
           response => {
             console.log('Reset password request sent successfully!', response);

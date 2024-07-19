@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class InvoiceService {
 
-  private baseUrl = 'http://localhost:8080/user'; // Adjust this URL to match your backend base URL
+  private baseUrl = 'https://ravishing-youth-production.up.railway.app/user'; // Adjust this URL to match your backend base URL
 
   constructor(private http: HttpClient) { }
 

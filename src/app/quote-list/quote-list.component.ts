@@ -15,7 +15,7 @@ export class QuoteListComponent  {
   constructor(private http: HttpClient) {}
 
   fetchInvoices() {
-    this.http.get<any[]>('http://localhost:8080/user/homeInvoices?email=' + this.email)
+    this.http.get<any[]>('https://ravishing-youth-production.up.railway.app/user/homeInvoices?email=' + this.email)
       .subscribe(
         invoices => {
           this.invoices = invoices || [];

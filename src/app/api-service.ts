@@ -6,8 +6,8 @@ import { Company } from "./company";
 
 export class ApiService {
     
-  private userRegistrationUrl = 'http://localhost:8081/register';
-  private saveCompanyInfoUrl = 'http://localhost:8081/save-business-info';
+  private userRegistrationUrl = 'https://ravishing-youth-production.up.railway.app/register';
+  private saveCompanyInfoUrl = 'https://ravishing-youth-production.up.railway.app/save-business-info';
 
   constructor(private http: HttpClient) { }
 
