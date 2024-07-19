@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
   balance!: number;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private quoteService: QuoteService, private invoiceService: InvoiceService)  { }
-
+ 
+  
   ngOnInit(): void {
      // Start automatic slider motion on component initialization
      this.startSliderMotion();
@@ -67,7 +68,7 @@ export class DashboardComponent implements OnInit {
 
   
   fetchInvoices() {
-    this.http.get<any[]>('http://localhost:8081/user/homeInvoices?email=' + this.email)
+    this.http.get<any[]>('http://localhost:8080/user/homeInvoices?email=' + this.email)
       .subscribe(
         invoices => {
           // Assuming your backend API returns only 5 invoices
@@ -81,7 +82,7 @@ export class DashboardComponent implements OnInit {
       );
   }
   fetchProfilePictureByEmail(email: string) {
-    this.http.get('http://localhost:8081/user/displayProfileImage', {
+    this.http.get('http://localhost:8080/user/displayProfileImage', {
       responseType: 'blob',
       params: { email: this.email },
     }).subscribe(
@@ -174,7 +175,7 @@ fetchTotalUnpaidInvoices() {
       return;
     }
 
-    this.http.get<number>(`http://localhost:8081/user/getBalance?email=${this.email}`).subscribe(
+    this.http.get<number>(`http://localhost:8080/user/getBalance?email=${this.email}`).subscribe(
       balance => {
         console.log('Balance:', balance);
         // Handle the balance data as needed, such as displaying it in the UI
@@ -186,6 +187,15 @@ fetchTotalUnpaidInvoices() {
       }
     );
   }
+ 
+  
+  getLetterByIndex(index: number): string {
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    return letters[index % letters.length];
+  }
+  
+  
+  
   }
   
 

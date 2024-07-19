@@ -260,7 +260,7 @@ loadPaidInvoices() {
   }
 
   getQuoteDetails(quoteNo: number): void {
-    const apiUrl = `http://localhost:8081/user/quote/${quoteNo}`;
+    const apiUrl = `http://localhost:8080/user/quote/${quoteNo}`;
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
         console.log('Quote details:', response);
@@ -346,7 +346,7 @@ loadPaidInvoices() {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8081/user/quotes/${quoteNo}/update?email=${email}`;
+      const backendUrl = `http://localhost:8080/user/quotes/${quoteNo}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Invoice or Quote submitted successfully:', response);

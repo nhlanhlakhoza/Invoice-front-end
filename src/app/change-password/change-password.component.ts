@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -15,14 +16,16 @@ export class ChangePasswordComponent {
   showAlert: boolean = false;
   alertMessage: string = '';
   alertType: string = '';
-
+  email: string | null | undefined;
+  token: string = ''; // Initialize token property
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.changePasswordForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      
       password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]),
       confirm_password: new FormControl('', [Validators.required]),
     } ,{
@@ -48,22 +51,39 @@ export class ChangePasswordComponent {
       }
     }
   }
-  resetPassword() {
-    const email = this.changePasswordForm.get('email')?.value;
+ 
+
+  resetPassword(){
+    this.activatedRoute.queryParams.subscribe(params => {
+      const emailParam = Object.keys(params)[0]; // Get the first parameter key
+      this.email = emailParam;
+  
+      console.log(this.email);
+     
+    });
+
+ 
+    if (!this.email) {
+      // Handle invalid or missing token
+      this.showAlertMessage('danger', 'Invalid password reset link.');
+      return; // Exit function if token is invalid
+    }
+
     const password = this.changePasswordForm.get('password')?.value;
     const data = {
-      email: email,
-      password: password
+      email: this.email,
+      password: password,
+      token: this.token // Include token in the data sent to the backend
     };
 
-    this.http.post<any>('http://localhost:8081/user/resetPassword', data).subscribe(
+    this.http.post<any>('http://localhost:8080/user/resetPassword', data).subscribe(
       (response) => {
         console.log('Password reset successfully!', response);
         this.showAlertMessage('success', 'Reset password request sent successfully!');
         setTimeout(() => {
-          // Redirect to login page after 1 seconds
+          // Redirect to login page after 2 seconds
           this.router.navigate(['/login']);
-        }, 2000); // 2000 milliseconds =2  seconds
+        }, 2000);
       },
       (error) => {
         console.error('Error resetting password:', error);

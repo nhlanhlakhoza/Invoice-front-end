@@ -112,19 +112,26 @@
                       <div class="col-sm-7" >
                         <div>
                         <div class="card-body">
+                          <div style="display: flex;">
                           <h2 style="color: white;">Welcome back, <br/> {{ usernames }}!</h2>
-                        <div style="background-color: white; border-radius: 10px;text-align: center; border-bottom: 10px solid black;">
-                          <div *ngIf="balance !== undefined">
-                            <p>Balance: R {{ balance }}</p>
+
+                         
+                        </div>
+                 
+                          
+                        <div class="container2">
+                         
+                          <div style="display: inline;">
+                            <h1 style="font-size: 18px; margin-top: 30px; font-weight: 600; color: #000; font-family: 'Poppins';">BALANCE</h1> 
+                            <div *ngIf="balance !== undefined">
+                              <h1 style="font-weight: bold;color: black; font-family: 'Poppins';">R {{ balance }}</h1>
                           </div>
-                            <p style="font-size: 10px; margin-top: 30px;">TOTAL INVOICES</p> 
-                            <div *ngIf="totalInvoiceAmount !== undefined">
-                          <h1 style="font-weight: bold;color: black;">R {{ totalInvoiceAmount }}</h1>
                         </div>
                        
-                          <a routerLink ="/invoices" class="btn btn-sm btn-outline-primary">View Invoices</a>
                         </div>
                         </div>
+
+                        
                         </div>
                       </div>
                       <!--<div class="col-sm-3 text-center text-sm-left">
@@ -152,9 +159,9 @@
                       </div>
                       <ul class="p-0 m-0">
                         <div *ngIf="invoices.length > 0"></div>
-                        <li *ngFor="let invoice of invoices" class="d-flex mb-4 pb-1">
+                        <li *ngFor="let invoice of invoices ; let i = index" class="d-flex mb-4 pb-1">
                           <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
+                            <span class="avatar-initial rounded bg-label-primary"><i class="">{{ getLetterByIndex(i)}}.</i></span>
                           </div>
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div class="me-2">
@@ -170,6 +177,14 @@
                         <div *ngIf="invoices.length === 0">
                           <p>No items to display.</p>
                         </div>
+                        <div style="display: inline;">
+                        <hr> 
+                            <div *ngIf="totalInvoiceAmount !== undefined">
+                          <h1 class="total">TOTAL: R {{ totalInvoiceAmount }}</h1>
+                          </div>
+                    </div>
+
+
                       </ul>
                       
           
@@ -195,9 +210,9 @@
                         </div>
                         <ul class="p-0 m-0">
                           <div *ngIf="quotes.length > 0"></div>
-                          <li *ngFor="let quote of quotes" class="d-flex mb-4 pb-1">
+                          <li *ngFor="let quote of quotes ; let i = index" class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                              <span class="avatar-initial rounded bg-label-primary"><i class="">A.</i></span>
+                              <span class="avatar-initial rounded bg-label-primary"><i class="">{{ getLetterByIndex(i)}}.</i></span>
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                               <div class="me-2">
@@ -212,6 +227,8 @@
                           <div *ngIf="quotes.length === 0">
                             <p>No items to display.</p>
                           </div>
+
+
                         </ul>
                         
             
@@ -292,5 +309,4 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <router-outlet></router-outlet>
-
 

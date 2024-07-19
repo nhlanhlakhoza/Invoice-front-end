@@ -11,7 +11,7 @@ export class PaymentSatusComponent {
   constructor(private snackBar: MatSnackBar, private http: HttpClient) {}
 
   public changeStatus(email: string, invoiceNo: number): void {
-    const url = `http://localhost:8081/user/${email}/${invoiceNo}`;
+    const url = `http://localhost:8080/user/${email}/${invoiceNo}`;
     this.http.get(url).subscribe(
       () => {
         // Success message

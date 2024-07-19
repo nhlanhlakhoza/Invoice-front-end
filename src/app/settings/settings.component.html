@@ -95,9 +95,9 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              
+               <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
               <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+               
                   <div class="card h-100">
 
                     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form1'">
@@ -149,12 +149,13 @@
         </ol>
         
       </div>
-      <button class="btn btn-secondary" style="margin-left: 28px; float: right; margin-bottom: 10px;"
+
+    <button class="btn btn-secondary" style="margin-left: 2px; float: right; margin-bottom: 10px; background-color:#9570F1 ;"
               (click)="toggleForms('form1')">Back</button>
     </div>
   </div>
   <ng-template #noNotifications>
-    <p> No notifications available.</p>
+    <p style="margin-left: 10px;"> No notifications available.</p>
   </ng-template>
   <!-- End of Notifications -->
 

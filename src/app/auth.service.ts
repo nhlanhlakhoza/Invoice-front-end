@@ -10,7 +10,7 @@ import { TokenApiModel } from './models/token-api.model';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8081/user'; // Your backend API base URL
+  private baseUrl = 'http://localhost:8080/user'; // Your backend API base URL
 
   constructor(private http: HttpClient) { }
 

@@ -234,7 +234,7 @@ export class SettingsComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       const email = this.extractEmailFromToken(token);
-      const backendUrl = `http://localhost:8081/user/quotes/${this.quoteNumber}/update?email=${email}`;
+      const backendUrl = `http://localhost:8080/user/quotes/${this.quoteNumber}/update?email=${email}`;
       this.http.post<any>(backendUrl, this.formData.value).subscribe(
         (response: any) => {
           console.log('Quotation updated successfully', response);

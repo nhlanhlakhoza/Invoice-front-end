@@ -148,7 +148,7 @@ setActiveMenuItem(menuItem: string) {
   businessInfoResponse!: BusinessInfoResponse; // Assuming you have a property to store the JSON response
 
 fetchBusinessInfo(): void {
-  this.http.get<BusinessInfoResponse>('http://localhost:8081/user/email/' + this.email)
+  this.http.get<BusinessInfoResponse>('http://localhost:8080/user/email/' + this.email)
     .subscribe(
       (response: BusinessInfoResponse) => {
         this.businessInfoResponse = response; // Store the JSON response
@@ -181,7 +181,7 @@ fetchBusinessInfo(): void {
       const token = localStorage.getItem('token');
       if (token) {
         const email = this.extractEmailFromToken(token);
-        const backendUrl = `http://localhost:8081/user/createInvoiceOrQuote?email=${email}`;
+        const backendUrl = `http://localhost:8080/user/createInvoiceOrQuote?email=${email}`;
         this.http.post<any>(backendUrl, this.formData.value).subscribe(
           (response: any) => {
             console.log('Invoice or Quote submitted successfully:', response);
