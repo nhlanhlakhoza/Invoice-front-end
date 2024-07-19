@@ -23,6 +23,11 @@
 
 }
 
+a.active {
+  color: black;
+  border-bottom: 2px solid blue; 
+}
+
 .draft{
     color: #E1BF45;
     background-color: #E1BF4566;

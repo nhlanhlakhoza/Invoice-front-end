@@ -59,7 +59,7 @@ import { DatePipe } from '@angular/common';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(), // Import IonicModule.forRoot() here
+    IonicModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
@@ -72,7 +72,7 @@ import { DatePipe } from '@angular/common';
     MatDialogModule,
     MatButtonModule,
     MatSliderModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     DatePipe

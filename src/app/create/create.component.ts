@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonButton } from '@ionic/angular';
 import { Company } from '../company';
 interface BusinessInfoResponse {
   id: number;
@@ -49,7 +50,11 @@ interface FormData {
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css', 'one.css', 'two.css', 'three.css']
 })
+
+//here
 export class CreateComponent {
+
+  
   formData!: FormGroup;
   currentStep: number = 1;
   activeMenuItem!: string;
@@ -104,6 +109,7 @@ export class CreateComponent {
       companyName: [this.selectedCompanyName, Validators.required] // Initialize companyName with selectedCompanyName and apply required validator
     });
   }
+  
 
   get items(): FormArray {
     return this.formData.get('items') as FormArray;
@@ -127,8 +133,6 @@ export class CreateComponent {
   nextStep(): void {
     this.currentStep++;
   }
-  
-
   setCurrentStep(step: number): void {
     this.currentStep = step;
   }

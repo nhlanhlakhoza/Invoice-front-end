@@ -46,18 +46,28 @@
         </nav>
         <div class="row">
           <div class="col">
-        <div *ngIf="profileImage">
-          <img [src]="profileImage" class="imageCentering" width="178px" height="178px">
-        </div>
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col">
+                  <div class="text-center">
+                    <div *ngIf="profileImage">
+                      <img [src]="profileImage" class="imageCentering" width="178" height="178">
+                    </div>
+
+                    <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none">
         
-        <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none">
-        
-        <img 
-          src="assets/img/Group 2.svg" 
-          width="30px" 
-          height="30px" 
-          class="add-image" 
-          (click)="confirmAction()">
+                    <img 
+                      src="assets/img/Group 2.svg" 
+                      width="30px" 
+                      height="30px" 
+                      class="add-image" 
+                      (click)="confirmAction()">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+       
         </div>
         </div>
         

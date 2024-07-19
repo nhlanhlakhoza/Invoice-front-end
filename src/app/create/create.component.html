@@ -11,59 +11,35 @@
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+  <ion-buttons class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+    <ion-button routerLink="/dashboard" class="nav-item px-0 me-xl-4">
+      <ion-label class="rounded-background"><strong>X</strong></ion-label>
+    </ion-button>
+  </ion-buttons>
+  
 
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar">
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a routerLink="/dashboard" class="nav-item nav-link px-0 me-xl-4">
-                <strong class="rounded-background">X</strong>
-              </a>
-            </div>
+  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <!-- Search -->
+    <!-- /Search -->
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-             
-              <!-- /Search -->
+    <ion-buttons class="navbar-nav flex-row align-items-center ms-auto">
+      <ion-button class="nav-item lh-1 me-3" fill="clear">
+        <ion-icon slot="start" name="star"></ion-icon>
+        <ion-label>Invoice Or<br><br>Quotation</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </div>
+</nav>
 
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="github-button"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    ><span>Invoice Or <br/><br/>
-                      Quotation</span></a
-                  >
-                </li>
 
-               
-              </ul>
-            </div>
-          </nav>
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+  <a (click)="toggleForms('form1')" [class.active]="currentForm === 'form1'">Invoice Information</a>
+  <a (click)="toggleForms('form2')" [class.active]="currentForm === 'form2'">Client data</a>
+  <a (click)="toggleForms('form3')" [class.active]="currentForm === 'form3'">Items & payment</a>
+</nav>
 
-        <nav
-          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-          id="layout-navbar">
-       
-          
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <li [class.active]="activeMenuItem === 'home'">
-                  <a (click)="setCurrentStep(1)">Invoice Information</a>
-                </li>
-                <li [class.active]="activeMenuItem === 'Client data'" style="margin-left: 40px;">
-                  <a (click)="setCurrentStep(2)">Client data</a>
-                </li>
-                <li [class.active]="activeMenuItem === 'Items & payment'" style="margin-left: 45px;">
-                  <a (click)="setCurrentStep(3)">Items & payment</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+
         
 
           <!-- / Navbar -->
@@ -123,6 +99,7 @@
                           </form>
 
                         </div>
+                        
                         <div id="orderStatisticsChart"></div>
                       </div>
                       

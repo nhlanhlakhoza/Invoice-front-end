@@ -45,24 +45,17 @@
           </nav>
           
           <div class="row">
-            <div class="col-12">
+            <div class="col">
               <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                  <ul class="navbar-nav flex-row align-items-center ms-auto">
-                    <li style="margin-left: 10px;">
-                      <a (click)="toggleForms('form1')">All</a>
-                    </li>
-                    <li style="margin-left: 25px;">
-                      <input type="text" placeholder="Search Quotations" [(ngModel)]="searchQuery" (input)="performSearch()">
-                    </li>
-                    <li style="margin-left: 10px;">
-                      <button class="filter" (click)="toggleForms('form4')">Filter</button>
-                    </li>
-                  </ul>
-                </div>
+                <a (click)="toggleForms('form1')" style="margin-left: 10px;">All</a>
+                <input type="text" placeholder="Search Quotations" [(ngModel)]="searchQuery" (input)="performSearch()" style="margin-left: 25px;">
+                <button class="filter" (click)="toggleForms('form4')" style="margin-left: 25px;">Filter</button>
               </nav>
             </div>
           </div>
+          
+
+      
                     <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -72,9 +65,9 @@
             <div class="container-xxl flex-grow-1 container-p-y" >
               
               <div class="row">
-<div class="col">                  <div class="card h-100">
-
-                    <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;" *ngIf="currentForm === 'form1'">
+            <div class="col" *ngIf="currentForm === 'form1'">    
+                <div class="card h-100">
+                    <div class="card-body">
                       <div class="">
                         <div class="">
                           <div *ngFor="let quote of quotes">
@@ -101,7 +94,7 @@
                
                            <!-- Filtering -->
                            
-<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4" *ngIf="currentForm === 'form4'">
+<div class="col" *ngIf="currentForm === 'form4'">
   <div class="card h-100">
     <div class="card-body" style="border-bottom: 2px; border-color: #9570F1;">
       <div class="">

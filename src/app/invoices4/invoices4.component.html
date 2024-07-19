@@ -45,37 +45,13 @@
 
           <nav
           class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-          id="layout-navbar">
-       
+          id="layout-navbar">           
+         <a (click)="toggleForms('form1')" [class.active]="currentForm === 'form1'">All</a>
+<a (click)="toggleForms('form2')" [class.active]="currentForm === 'form2'" style="margin-left: 10px;">Paid</a>
+<a (click)="toggleForms('form3')" [class.active]="currentForm === 'form3'" style="margin-left: 10px;">Unpaid</a>
+<input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="performSearch()" style="margin-left: 10px;">
+<button class="filter" (click)="toggleForms('form4')" [class.active]="activeForm === 'form4'" style="margin-left: 10px;">Filter</button>
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-           
-
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-           <li style="margin-left: 10px;">
-            <a  (click)="toggleForms('form1')">All </a>
-           </li>
-
-           <li style="margin-left: 10px;">
-            <a (click)="toggleForms('form2')">Paid </a>
-           </li>
-
-           <li style="margin-left: 10px;">
-            <a (click)="toggleForms('form3')">Unpaid</a>
-           </li>
-          <!-- Add an input field for search -->
-<li style="margin-left: 10px;">
-  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="performSearch()">
-</li>
-
-           <li style="margin-left: 10px;">
-            <button class="filter" (click)="toggleForms('form4')">Filter</button>
-           </li>
-              
-
-             
-            </ul>
-          </div>
         </nav>
 
           <!-- / Navbar -->

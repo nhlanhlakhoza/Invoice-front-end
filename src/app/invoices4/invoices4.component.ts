@@ -28,6 +28,7 @@ export class Invoices4Component implements OnInit {
   formData: any;
   currentStep: number = 1; // Initialize currentStep as 1
   submittingForm: boolean = false;
+  activeForm: string = 'form1';
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
